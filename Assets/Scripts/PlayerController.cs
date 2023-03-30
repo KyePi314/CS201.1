@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    //Variables
+    public float maxSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,14 +17,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    void onMove(InputAction.CallbackContext context)
-    {
-
-    }
-    void onAttack()
-    {
-
+        float horizontal = Input.GetAxis("Horizontal"); //Stores the Input.GetAxis result
+        Debug.Log(horizontal);
+        Vector2 position = transform.position;
+        position.x = position.x + 0.1f * horizontal;
+        transform.position = position;
     }
 }
