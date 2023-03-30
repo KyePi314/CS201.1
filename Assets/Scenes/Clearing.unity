@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 266864672}
   m_Layer: 0
   m_Name: hitbox
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1276,9 +1276,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1766720239}
   - component: {fileID: 1766720240}
+  - component: {fileID: 1766720241}
   m_Layer: 0
   m_Name: House-1
-  m_TagString: Untagged
+  m_TagString: NPC House
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1350,6 +1351,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &1766720241
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766720238}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.12, y: 0.98}
+    newSize: {x: 1.12, y: 0.98}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.12, y: 0.98}
+  m_EdgeRadius: 0
 --- !u!1 &2070361666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,9 +1423,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7640072471617995171, guid: 4ed6348d39d2f1e4698232f410bb9c71, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640072471617995180, guid: 4ed6348d39d2f1e4698232f410bb9c71, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7640072471617995180, guid: 4ed6348d39d2f1e4698232f410bb9c71, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7640072471617995180, guid: 4ed6348d39d2f1e4698232f410bb9c71, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7640072471617995180, guid: 4ed6348d39d2f1e4698232f410bb9c71, type: 3}
       propertyPath: m_UseFullKinematicContacts

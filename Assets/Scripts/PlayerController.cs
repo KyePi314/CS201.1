@@ -6,12 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     //Variables
-    public float maxSpeed;
-
+    private float maxSpeed = 5.0f;
     // Start is called before the first frame update
     void Start()
     {
-        
+      
     }
 
     // Update is called once per frame
@@ -19,8 +18,11 @@ public class PlayerController : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal"); //Stores the Input.GetAxis result
         Debug.Log(horizontal);
-        Vector2 position = transform.position;
-        position.x = position.x + 0.1f * horizontal;
-        transform.position = position;
+
+        Vector2 position = transform.position; //Variable to store player position?
+        position.x = position.x + 3.0f * horizontal * Time.deltaTime;
+        transform.position = position; //Tranforms the player's position based on the users input
+
     }
+
 }
