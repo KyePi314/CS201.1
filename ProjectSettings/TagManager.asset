@@ -6,6 +6,9 @@ TagManager:
   tags:
   - NPC House
   - Ground
+  - SceneExits
+  - Spawn
+  - PlayerSpawnControler
   layers:
   - Default
   - TransparentFX
