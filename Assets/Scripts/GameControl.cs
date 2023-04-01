@@ -1,21 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameControl : MonoBehaviour
 {
-    Vector2 spawnPointTest;
-   
-    // Start is called before the first frame update
-    void Start()
+    public Vector2 spawnPointTest;
+    public string prevLevel;
+
+    public string spawn;
+    GameObject[] spawnPoints;
+    GameObject player;
+    //SceneLoaderManager sceneLoaderManager;
+
+    private void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Awake()
     {
-        spawnPointTest = GameObject.FindWithTag("Spawn").transform.position;
+        
+        
     }
 
 }
