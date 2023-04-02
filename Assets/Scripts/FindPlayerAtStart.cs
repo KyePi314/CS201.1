@@ -6,21 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class FindPlayerAtStart : MonoBehaviour
 {
-    private static bool cameraExists;
+    public static FindPlayerAtStart Instance;
     void Start()
     {
-        //Makes sure that there are no duplicates of the camera in the first scene.
-        if (!cameraExists)
-        {
-            cameraExists = true;
-            DontDestroyOnLoad(transform.gameObject);
-        }
-        else
+        if (Instance != null)
         {
             Destroy(gameObject);
         }
-
-
+        else
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     private CinemachineVirtualCamera vCam;
