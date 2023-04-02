@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Woodlands-2.unity
     guid: d3375bfb06f78d84ab6516a45cb64f1d
+  - enabled: 1
+    path: Assets/Scenes/Bog-1.unity
+    guid: cbc5142322c6c1045a82ac2996163d02
+  - enabled: 1
+    path: Assets/Scenes/The Caves - 1.unity
+    guid: eb8d8da50564ab3499143f6a831a805a
   m_configObjects: {}

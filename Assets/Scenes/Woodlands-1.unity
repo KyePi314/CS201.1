@@ -654,7 +654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 906346357}
   - component: {fileID: 906346359}
-  - component: {fileID: 906346361}
+  - component: {fileID: 906346360}
   m_Layer: 0
   m_Name: Clearing
   m_TagString: Spawn
@@ -729,7 +729,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &906346361
+--- !u!114 &906346360
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -738,12 +738,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 906346356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93bd3dba32ff654090051ac171b498f, type: 3}
+  m_Script: {fileID: 11500000, guid: 73d1401a645619143838139c24674fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPointTest: {x: 0, y: 0}
-  prevLevel: 
-  spawn: 
+  lastExitName: Clearing
 --- !u!1 &1036703260
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,9 +786,9 @@ GameObject:
   - component: {fileID: 1056681298}
   - component: {fileID: 1056681301}
   - component: {fileID: 1056681300}
-  - component: {fileID: 1056681299}
+  - component: {fileID: 1056681303}
   m_Layer: 0
-  m_Name: Woodlands-1
+  m_Name: Bog-1
   m_TagString: SceneExits
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -811,25 +809,6 @@ Transform:
   m_Father: {fileID: 2096840757}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1056681299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056681297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b0b8eb6730b9414cb79497e37b2ce2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: 
-  spawnPointTest: {x: 0, y: 0}
-  prevLevel: 
-  sceneExit: 0
-  entryName: 
-  player: {fileID: 5758485736373485499, guid: 4ed6348d39d2f1e4698232f410bb9c71, type: 3}
-  gameControl: {fileID: 0}
 --- !u!61 &1056681300
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -908,6 +887,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1056681303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056681297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b24e2b57e8b03544be0f5b5f84528bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneLoaderManager: {fileID: 0}
+  exitName: 
+  sceneToLoad: 
 --- !u!1 &1162372310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,7 +1360,7 @@ GameObject:
   - component: {fileID: 1443886356}
   - component: {fileID: 1443886359}
   - component: {fileID: 1443886358}
-  - component: {fileID: 1443886357}
+  - component: {fileID: 1443886360}
   m_Layer: 0
   m_Name: Clearing
   m_TagString: SceneExits
@@ -1382,32 +1376,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443886355}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.91, y: -1.04, z: -0.22033603}
+  m_LocalPosition: {x: -4.9100018, y: -1.04, z: -0.22033603}
   m_LocalScale: {x: 0.2344875, y: 1.519, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2096840757}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1443886357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443886355}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b0b8eb6730b9414cb79497e37b2ce2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawn: 
-  spawnPointTest: {x: 0, y: 0}
-  prevLevel: 
-  sceneExit: 0
-  entryName: 
-  player: {fileID: 0}
-  gameControl: {fileID: 0}
 --- !u!61 &1443886358
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1486,6 +1461,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1443886360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443886355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b24e2b57e8b03544be0f5b5f84528bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneLoaderManager: {fileID: 0}
+  exitName: Woodlands-1
+  sceneToLoad: Clearing
 --- !u!1 &1475051485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,8 +1487,8 @@ GameObject:
   - component: {fileID: 1475051486}
   - component: {fileID: 1475051487}
   m_Layer: 0
-  m_Name: The Bog-1
-  m_TagString: Untagged
+  m_Name: Bog-1
+  m_TagString: Spawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1570,52 +1560,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1515211208
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1515211210}
-  - component: {fileID: 1515211209}
-  m_Layer: 0
-  m_Name: GlobalObject
-  m_TagString: PlayerSpawnControler
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1515211209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1515211208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3883330415a00459d1ded519a3748b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  spawnLocation: {fileID: 0}
---- !u!4 &1515211210
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1515211208}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.101993, y: -1.0458928, z: -9.949192}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1802620702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,6 +1644,57 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1811486569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1811486571}
+  - component: {fileID: 1811486570}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1811486570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811486569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0b8eb6730b9414cb79497e37b2ce2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPointTest: {x: 0, y: 0}
+  sceneToLoad: 
+  exitName: 
+  sceneLoad: {fileID: 0}
+  spawnPoints:
+  - {fileID: 1443886355}
+  player: {fileID: 0}
+--- !u!4 &1811486571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811486569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 23.737114, y: -1.8621247, z: -9.647128}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1849494292
 GameObject:
   m_ObjectHideFlags: 0

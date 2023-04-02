@@ -6,21 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public static bool playerExists;
-    void Start()
-    {  
-        ////Makes sure that there are no duplicates of the player in the first scene.
-        //if (!playerExists)
-        //{
-        //    playerExists = true;
-        //    DontDestroyOnLoad(transform.gameObject);
-        //}
-        //else
-        //{
-        //    Destroy(gameObject);
-        //}
-        
-    }
+    GameObject player;
+    public string entryName;
+    private Vector2 respawnPoint;
+    //public static bool playerExists = false;
+    //void Start()
+    //{
+    //    //Makes sure that there are no duplicates of the player in the first scene.
+    //    if (!playerExists)
+    //    {
+    //        playerExists = true;
+    //        DontDestroyOnLoad(transform.gameObject);
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+
+    //}
+
     // Update is called once per frame
     void Update()
     {
@@ -30,5 +34,4 @@ public class PlayerController : MonoBehaviour
         transform.position = position; //Tranforms the player's position based on the users input
        
     }
-
 }
