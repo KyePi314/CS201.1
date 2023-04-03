@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * This script is set to the various exits that are in the scenes
+ * it has the code for the trigger and saves the data that needs to be passed to the script attached to the global game manager that doesn't get destroyed on load
+ * */
 public class SceneExit : MonoBehaviour
 {
     public SceneLoaderManager SceneLoaderManager;
-
+    //Variables
     public string exitName;
     public string sceneToLoad;
     private void OnTriggerEnter2D(Collider2D other)
