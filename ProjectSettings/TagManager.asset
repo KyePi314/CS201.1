@@ -46,11 +46,17 @@ TagManager:
   - name: Background
     uniqueID: 2243204015
     locked: 0
+  - name: Tiles
+    uniqueID: 2229520021
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Player
     uniqueID: 2978259453
+    locked: 0
+  - name: SpawnsAndExits
+    uniqueID: 3398651105
     locked: 0
   - name: Foreground
     uniqueID: 586770125

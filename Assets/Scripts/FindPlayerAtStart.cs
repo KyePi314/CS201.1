@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//This script has the virtual camera find the player each time the scene changes, ensuring the camera continues to follow the player despite changing scenes
 public class FindPlayerAtStart : MonoBehaviour
 {
+    //Makes sure the camera doesn't get destroyed when a new scene loads
     public static FindPlayerAtStart Instance;
     void Start()
     {
