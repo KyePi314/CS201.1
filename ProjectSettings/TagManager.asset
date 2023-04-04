@@ -9,6 +9,8 @@ TagManager:
   - SceneExits
   - Spawn
   - PlayerSpawnControler
+  - toxic
+  - Light
   layers:
   - Default
   - TransparentFX

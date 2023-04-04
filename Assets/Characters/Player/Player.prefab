@@ -140,6 +140,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
+  runSpeed: 8
+  _isFacedRight: 1
+  jumpimpulse: 6
+  airSpeed: 5
 --- !u!114 &3719899265842915490
 MonoBehaviour:
   m_ObjectHideFlags: 0
