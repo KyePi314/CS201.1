@@ -11,6 +11,7 @@ TagManager:
   - PlayerSpawnControler
   - toxic
   - Light
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,11 +19,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Player
+  - Enemy
+  - PlayerHitbox
+  - EnemyHitbox
   - 
   - 
   - 
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemies
+    uniqueID: 2845239117
     locked: 0
   - name: Player
     uniqueID: 2978259453

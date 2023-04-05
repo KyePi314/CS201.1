@@ -16,7 +16,7 @@ public class SceneExit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         SceneLoaderManager = GetComponent<SceneLoaderManager>();
-        if (gameObject.CompareTag("SceneExits")) //When the player enters the trigger, it will check the they entered the scene exit tagged zone
+        if (gameObject.CompareTag("SceneExits") && other.tag.Equals("Player")) //When the player enters the trigger, it will check the they entered the scene exit tagged zone
         {
             sceneToLoad = gameObject.name; //Save the exit name to the variable which is the same as the name of the scene to load
             exitName = SceneManager.GetActiveScene().name; //Gets the name of the current scene, which is saved and will corralate to the name of the spawn pos in the next scene

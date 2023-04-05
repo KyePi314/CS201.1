@@ -14,5 +14,7 @@ internal class AnimStrings
     internal static string jump = "jump";
     internal static string isOnWall = "isOnWall";
     internal static string isOnCeilling = "isOnCeilling";
+    internal static string attack = "attack";
+    internal static string moveAllowed = "moveAllowed";
 }
 

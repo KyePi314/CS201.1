@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float jumpimpulse = 5f;
     public float airSpeed = 5f;
     private bool doubleJump;
+    private int jumpCount;
 
     //Used to access the animator and RigidBody components for objects with the playercontroller script attached to them (eg the player)
     Rigidbody2D rb;
@@ -58,28 +59,36 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            if (IsMoving && !touchDir.isOnWall) //Checks if the player is moving, and if they are sets the correct speed for if they are running or walking.
+            if (moveAllowed)
             {
-                if (touchDir.isGrounded)
+                if (IsMoving && !touchDir.isOnWall) //Checks if the player is moving, and if they are sets the correct speed for if they are running or walking.
                 {
-                    if (IsRunning)
-                    {
-                        return runSpeed;
-                    }
-                    else
-                    {
-                        return walkSpeed;
-                    }
+                    //if (touchDir.isGrounded)
+                    //{
+                        if (IsRunning)
+                        {
+                            return runSpeed;
+                        }
+                        else
+                        {
+                            return walkSpeed;
+                        }
+                    //}
+                    //else
+                    //{
+                    //    return airSpeed;
+                    //}
                 }
-               else
+                else //if the player is idle, the player speed is idle
                 {
-                    return airSpeed;
+                    return 0;
                 }
             }
-            else //if the player is idle, the player speed is idle
+            else
             {
                 return 0;
             }
+            
         }
     }
     //Used for getting what direction the player is facing, and handles the flipping of the character for which direction in which they face
@@ -98,6 +107,13 @@ public class PlayerController : MonoBehaviour
         } 
     }
 
+    public bool moveAllowed
+    {
+        get
+        {
+            return animator.GetBool(AnimStrings.moveAllowed);
+        }
+    }
 
     private void Awake()
     {
@@ -113,7 +129,10 @@ public class PlayerController : MonoBehaviour
     {
         //Sets how fast the player is moving based off which move state its in (run, walk etc)
         rb.velocity = new Vector2(moveInput.x * currentSpeed, rb.velocity.y);
-
+        if (touchDir.isGrounded) //Sets the bool that checks whether or not the player has already double jumped to false if they are on the ground
+        {
+            doubleJump = false;
+        }
         animator.SetFloat(AnimStrings.yVelocity, rb.velocity.y);
     }
 
@@ -148,15 +167,28 @@ public class PlayerController : MonoBehaviour
             IsRunning = false;
         }
     }
-
+    //Handles whether the player is jumping of not based on if they are currently pressing the space key
     public void onJump(InputAction.CallbackContext context)
     {
-        if (context.started && touchDir.isGrounded)
+        if (context.started && touchDir.isGrounded && moveAllowed) //if statement for the inital jump
         {
             animator.SetTrigger(AnimStrings.jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpimpulse);
+            doubleJump = false;
+        }
+        if (context.started && doubleJump == false) //if the player has only jumped once, the double jump bool will be false meaning that they can double jump.
+        {
+            animator.SetTrigger(AnimStrings.jump);
+            rb.velocity = new Vector2(rb.velocity.x, jumpimpulse);
+            doubleJump = true;
+        }
+    }
 
-            
+    public void onAttack(InputAction.CallbackContext context)
+    {
+        if (context.started && touchDir.isGrounded)
+        {
+            animator.SetTrigger(AnimStrings.attack);
         }
     }
 }
