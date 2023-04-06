@@ -1,18 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyRat : MonoBehaviour
+public class EnemyGolem : MonoBehaviour
 {
     public DetectionZone edgeZone;
     public DetectionZone attackZone;
     spaceTouchDirection touchDirection;
     Animator animator;
-    public float walkSpeed = 3f;
+    public float walkSpeed = 5f;
     private bool _seesTarget = false;
-    private int maxHP = 80;
-    private int hitPower = 10;
+    private int _maxHP = 110;
+
     Rigidbody2D rb;
 
     public enum moveDirection { Right, Left }
@@ -34,16 +33,12 @@ public class enemyRat : MonoBehaviour
         }
     }
 
-    public int Health
+    public int maxHP
     {
         get
         {
-            return maxHP;
+            return _maxHP;
         }
-    }
-    public int attack
-    {
-        get { return hitPower; }
     }
     public bool moveAllowed
     {
@@ -56,7 +51,7 @@ public class enemyRat : MonoBehaviour
     public moveDirection walkDirection
     {
         get { return _moveDirection; }
-        set 
+        set
         {
             if (_moveDirection != value)
             {
@@ -72,7 +67,7 @@ public class enemyRat : MonoBehaviour
                     moveDirectionV = Vector2.left;
                 }
             }
-            _moveDirection = value; 
+            _moveDirection = value;
         }
     }
 
@@ -97,7 +92,7 @@ public class enemyRat : MonoBehaviour
         {
             rb.velocity = new Vector2(walkSpeed * moveDirectionV.x, rb.velocity.y);
         }
-       else
+        else
         {
             rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, stopRate), rb.velocity.y);
         }

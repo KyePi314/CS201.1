@@ -16,5 +16,8 @@ internal class AnimStrings
     internal static string isOnCeilling = "isOnCeilling";
     internal static string attack = "attack";
     internal static string moveAllowed = "moveAllowed";
+    internal static string isAlive = "isAlive";
+    internal static string seeTarget = "seeTarget";
+    internal static string isHit = "isHit";
 }
 

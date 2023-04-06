@@ -25,7 +25,9 @@ public class SceneExit : MonoBehaviour
             PlayerPrefs.SetString("Scene Name", sceneToLoad); //Stores the name to the next scene to load
             SceneLoaderManager.Instance.SceneSwap(); //calls the class from the global scene loader manager script
         }
+
         
     }
+
 
 }

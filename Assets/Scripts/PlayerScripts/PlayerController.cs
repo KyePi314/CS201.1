@@ -12,6 +12,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     spaceTouchDirection touchDir;
+    takeDamage damageable;
 
     //Variables for player controller
     Vector2 moveInput;
@@ -23,7 +24,6 @@ public class PlayerController : MonoBehaviour
     public float jumpimpulse = 5f;
     public float airSpeed = 5f;
     private bool doubleJump;
-    private int jumpCount;
 
     //Used to access the animator and RigidBody components for objects with the playercontroller script attached to them (eg the player)
     Rigidbody2D rb;
@@ -114,21 +114,33 @@ public class PlayerController : MonoBehaviour
             return animator.GetBool(AnimStrings.moveAllowed);
         }
     }
-
+    public bool isAlive
+    {
+        get
+        {
+            return animator.GetBool(AnimStrings.isAlive);
+        }
+    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchDir = GetComponent<spaceTouchDirection>();
+        damageable = GetComponent<takeDamage>();
 
+        
     }
     private void Update()
     {
     }
     private void FixedUpdate()
     {
-        //Sets how fast the player is moving based off which move state its in (run, walk etc)
-        rb.velocity = new Vector2(moveInput.x * currentSpeed, rb.velocity.y);
+        if(!damageable.IsHit)
+        {
+            //Sets how fast the player is moving based off which move state its in (run, walk etc)
+            rb.velocity = new Vector2(moveInput.x * currentSpeed, rb.velocity.y);
+        }
+        
         if (touchDir.isGrounded) //Sets the bool that checks whether or not the player has already double jumped to false if they are on the ground
         {
             doubleJump = false;
@@ -140,8 +152,12 @@ public class PlayerController : MonoBehaviour
     {
         //If the player is moving, this method gets the input from the user and uses it to move the player according to this input
         moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
-        setFacedDirection(moveInput);
+        if (isAlive)
+        {
+            IsMoving = moveInput != Vector2.zero;
+            setFacedDirection(moveInput);
+        }
+        
     }
     //Used with the getter and setter to handle which direction the player is facing based on which direction along the x axis is being inputted via the moveinput variable
     private void setFacedDirection(Vector2 moveInput)
@@ -190,5 +206,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger(AnimStrings.attack);
         }
+    }
+
+    public void onHit(int damage, Vector2 knockback)
+    {
+        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
     }
 }
