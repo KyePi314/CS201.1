@@ -2,22 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(spaceTouchDirection))]
 public class spaceTouchDirection : MonoBehaviour
 {
-    //Variables
-    //Rigidbody2D rb;
+    //Variables etc
+    Animator animator;
+    CapsuleCollider2D touchCol;
+
     public ContactFilter2D castFilter;
+
     public float groundDistance = 0.05f;
     public float wallCheckDistance = 0.2f;
     public float ceillingDistance = 0.05f;
-    CapsuleCollider2D touchCol;
+    //bools
+    private bool _isGrounded;
+    private bool _isOnWall;
+    private bool _isOnCeilling;
+    private bool _isEdge;
+    //Raycast arrays to use in checking whether the gameobject is grounded, on the wall, or on the ceilling
     RaycastHit2D[] groundHit = new RaycastHit2D[5];
     RaycastHit2D[] wallHits = new RaycastHit2D[5];
     RaycastHit2D[] ceillingHits = new RaycastHit2D[5];
-    Animator animator;
-    private bool _isGrounded = true;
-    private bool _isOnWall = true;
-    private bool _isOnCeilling = true;
+    
+
     private Vector2 wallCheckDirection => gameObject.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
 
     public bool isGrounded
@@ -58,6 +65,7 @@ public class spaceTouchDirection : MonoBehaviour
         }
     }
 
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -72,5 +80,7 @@ public class spaceTouchDirection : MonoBehaviour
         isOnWall = touchCol.Cast(wallCheckDirection, castFilter, wallHits, wallCheckDistance) > 0;
         isOnCeilling = touchCol.Cast(Vector2.up, castFilter, ceillingHits, ceillingDistance) > 0;
     }
+
+    
 }
 
