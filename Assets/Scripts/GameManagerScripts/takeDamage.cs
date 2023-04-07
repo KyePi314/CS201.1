@@ -8,80 +8,85 @@ using UnityEngine.Events;
 public class takeDamage : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
-    enemyHealthandDamage enemy;
-    PlayerHealthandDamage player;
     Animator animator;
-    //[SerializeField]
-    //private int _maxHealth;
-    //[SerializeField]
-    //private int _health;
-    //[SerializeField]
-    //private bool _isAlive = true;
+    [SerializeField]
+    private int _maxHP;
+    [SerializeField]
+    private int _health;
+    [SerializeField]
+    private bool _isAlive = true;
     [SerializeField]
     private bool isInvincible = false;
     private float lastHitTimer = 0;
     private float invincibiltyTimer = 0.25f;
-    
+    private int _hitPower;
 
-    //public int maxHealth
-    //{
-    //    get
-    //    {
-    //        return _maxHealth;
-    //    }
-    //    set
-    //    {
-    //        _maxHealth = value;
-    //    }
-    //}
-
-    //public int Health
-    //{
-    //    get
-    //    {
-    //        return _health;
-
-    //    }
-    //    set
-    //    {
-    //        _health = value;
-            
-    //    }
-    //}
-
-    //public bool IsAlive
-    //{
-    //    get
-    //    {
-            
-    //        return _isAlive;
-    //    }
-    //    set
-    //    {
-    //        _isAlive = value;
-    //        animator.SetBool(AnimStrings.isAlive, value);
-    //        Debug.Log("IsAlive set " + value);
-    //    }
-    //}
-
-    public bool IsHit
+    public int MaxHP
     {
         get
         {
-            return animator.GetBool(AnimStrings.isHit);
+            return _maxHP;
         }
-        private set
+        set
         {
-            animator.SetBool(AnimStrings.isHit, value);
+            _maxHP = value;
+        }
+    }
+    public int CurrentHealth
+    {
+        get
+        {
+            return _health;
+
+        }
+        set
+        {
+            _health = value;
+
+        }
+    }
+    public int attackHit
+    {
+        get
+        {
+            return _hitPower;
+        }
+        set
+        {
+
+            _hitPower = value;
         }
     }
 
+    public bool IsAlive
+    {
+        get
+        {
+
+            return _isAlive;
+        }
+        set
+        {
+            _isAlive = value;
+            animator.SetBool(AnimStrings.isAlive, value);
+            Debug.Log("IsAlive set " + value);
+        }
+    }
+    public bool LockVelocity
+    {
+        get
+        {
+            return animator.GetBool(AnimStrings.lockVelocity);
+        }
+        set
+        {
+            animator.SetBool(AnimStrings.lockVelocity, value);
+        }
+    }
     private void Awake()
     {
         animator = GetComponent<Animator>();
 
-        player = GetComponent<PlayerHealthandDamage>();
-        enemy =  GetComponent<enemyHealthandDamage>();
         
     }
     public void Update()
@@ -100,52 +105,26 @@ public class takeDamage : MonoBehaviour
     }
     public bool Hit(int damage, Vector2 knockback)
     {
-
-        if (gameObject.CompareTag("Enemy"))
+        if (IsAlive && !isInvincible)
         {
-            damage = enemy.attackHit;
-            if (enemy.IsAlive && !isInvincible)
+            CurrentHealth -= damage;
+            isInvincible = true;
+            animator.SetTrigger(AnimStrings.hitTrigger);
+            LockVelocity = true;
+            if (CurrentHealth <= 0)
             {
-                enemy.Health -= damage;
-                isInvincible = true;
-
-                if (enemy.Health <= 0)
-                {
-                    enemy.IsAlive = false;
-                }
-                IsHit = true;
-                damageableHit?.Invoke(damage, knockback);
-                return true;
-
+                IsAlive = false;
             }
-            else
-            {
-                return false;
-            }
+           
+            damageableHit?.Invoke(damage, knockback);
+            return true;
+
         }
-
-        else if (gameObject.CompareTag("Player"))
+        else
         {
-            if (player.IsAlive && !isInvincible)
-            {
-                player.Health -= damage;
-                isInvincible = true;
-
-                if (player.Health <= 0)
-                {
-                    player.IsAlive = false;
-                }
-                IsHit = true;
-                damageableHit?.Invoke(damage, knockback);
-                return true;
-
-            }
-            else
-            {
-                return false;
-            }
+            return false;
         }
-        else { return false; }
+           
         
     }
 

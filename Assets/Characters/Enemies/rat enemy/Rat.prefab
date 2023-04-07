@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 10
-  knockback: {x: 0, y: 0}
+  knockback: {x: 3, y: 1}
 --- !u!1 &3815933639978470510
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,13 +233,12 @@ GameObject:
   - component: {fileID: 7423515989646260209}
   - component: {fileID: -5750677283962945498}
   - component: {fileID: 3233200959123941473}
-  - component: {fileID: 230153299421756389}
   - component: {fileID: 4136906421431686845}
   - component: {fileID: 306113268103049971}
   - component: {fileID: 307546761849447282}
-  - component: {fileID: 871359424984514928}
+  - component: {fileID: 6750922929671682565}
   m_Layer: 8
-  m_Name: ratEnemy
+  m_Name: Rat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,21 +351,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.041521084, y: 0.037009656}
   m_Size: {x: 0.9674152, y: 0.50500834}
   m_Direction: 1
---- !u!114 &230153299421756389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7423515989646260210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 907b7e7c6cf642d42b9b1d5107640216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  edgeZone: {fileID: 6721327868929087963}
-  attackZone: {fileID: 7645196233434697896}
-  walkSpeed: 3
 --- !u!114 &4136906421431686845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,9 +414,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageableHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6750922929671682565}
+        m_TargetAssemblyTypeName: enemyMovement, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _maxHP: 80
+  _health: 80
+  _isAlive: 1
   isInvincible: 0
---- !u!114 &871359424984514928
+--- !u!114 &6750922929671682565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -441,10 +440,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7423515989646260210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c989fd683a9d5247b0d318af14a0929, type: 3}
+  m_Script: {fileID: 11500000, guid: 6101b2152629da147a23334588996bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 80
-  _health: 80
-  _isAlive: 1
-  enemies: []
+  edgeZone: {fileID: 6721327868929087963}
+  attackZone: {fileID: 7645196233434697896}
+  _walkSpeed: 3

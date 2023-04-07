@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631001640927712289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0.687, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -156,11 +156,10 @@ GameObject:
   - component: {fileID: 8301922181359707200}
   - component: {fileID: 209316359055310547}
   - component: {fileID: 1022840825178988690}
-  - component: {fileID: 6421862550831306293}
   - component: {fileID: 3720822760125381788}
   - component: {fileID: 7316186244117951944}
   - component: {fileID: 8739426854462781146}
-  - component: {fileID: 56878889748459007}
+  - component: {fileID: 3194856605280232016}
   m_Layer: 8
   m_Name: Golem
   m_TagString: Enemy
@@ -224,8 +223,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1449728179
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4628221225906215552, guid: 6946cd59d8c7e234f851a23d8ce98454, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -275,23 +274,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.023766696, y: -0.1188339}
   m_Size: {x: 1.1955184, y: 1.6470873}
   m_Direction: 0
---- !u!114 &6421862550831306293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8301922181359707207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c989fd683a9d5247b0d318af14a0929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitPower: 0
-  _maxHealth: 0
-  _health: 0
-  _isAlive: 1
-  enemies: []
 --- !u!114 &3720822760125381788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +295,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 320
+      m_Bits: 65
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -335,7 +317,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageableHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3194856605280232016}
+        m_TargetAssemblyTypeName: enemyMovement, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _maxHP: 110
+  _health: 110
+  _isAlive: 1
   isInvincible: 0
 --- !u!95 &8739426854462781146
 Animator:
@@ -347,7 +344,7 @@ Animator:
   m_GameObject: {fileID: 8301922181359707207}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bb58f32bde799644c9b06c38940ef44d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -357,7 +354,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &56878889748459007
+--- !u!114 &3194856605280232016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -366,12 +363,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8301922181359707207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d069ae4e47f81b34398bce38f6bcbd2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6101b2152629da147a23334588996bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   edgeZone: {fileID: 6645270865133426631}
-  attackZone: {fileID: 0}
-  walkSpeed: 5
+  attackZone: {fileID: 1708933058976004451}
+  _walkSpeed: 5
 --- !u!1 &8530422271578506404
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8530422271578506404}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.71, y: 1.079, z: 0}
+  m_LocalPosition: {x: 0.29, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -412,7 +409,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8530422271578506404}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -430,13 +427,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.0668347, y: 0.4215034}
-      - {x: 0.06515783, y: 0.58009404}
-      - {x: 0.31590098, y: 0.38865432}
-      - {x: 0.5778156, y: -0.35291237}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 1.0939214, y: -0.3748638}
-      - {x: 1.2261673, y: 0.21490029}
+    - - {x: 0.3544424, y: 0.43337673}
+      - {x: -0.12164721, y: 0.46334082}
+      - {x: 0.07071933, y: 0.3302777}
+      - {x: 0.2625821, y: -0.35291237}
+      - {x: -0.42796707, y: -0.97247136}
+      - {x: 0.550109, y: -0.7396089}
+      - {x: 0.71087265, y: -0.1863715}
+      - {x: 0.61422205, y: 0.17051429}
 --- !u!114 &5294717965205666227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,5 +447,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34ac27f3b2668694ca0a6d4d8e105a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 10
-  knockback: {x: 0, y: 0}
+  attackPower: 15
+  knockback: {x: 4, y: 2}
