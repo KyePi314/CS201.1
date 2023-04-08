@@ -15,6 +15,7 @@ TagManager:
   - edgeDetect
   - Golem
   - Rat
+  - target
   layers:
   - Default
   - TransparentFX
