@@ -144,6 +144,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectedColliders: []
+--- !u!1 &6029375031877742604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2812678410685687903}
+  - component: {fileID: 4794577528906004082}
+  - component: {fileID: 8532885237099050436}
+  m_Layer: 10
+  m_Name: stunDetect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2812678410685687903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029375031877742604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.754, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8301922181359707201}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4794577528906004082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029375031877742604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d36c2e7a82a294f97cea2f16f0b9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectedColliders: []
+--- !u!60 &8532885237099050436
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6029375031877742604}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.37046885, y: -0.08456087}
+      - {x: -0.5143305, y: -0.36183032}
+      - {x: -0.38968262, y: -0.7729985}
+      - {x: 0.48406672, y: -0.8373038}
+      - {x: 0.5036, y: -0.4248493}
+      - {x: 0.37656152, y: -0.07218993}
 --- !u!1 &8301922181359707207
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +259,7 @@ Transform:
   - {fileID: 8814117193251913586}
   - {fileID: 5934953880380023734}
   - {fileID: 7853342963620012508}
+  - {fileID: 2812678410685687903}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -368,7 +446,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edgeZone: {fileID: 6645270865133426631}
   attackZone: {fileID: 1708933058976004451}
-  _walkSpeed: 5
+  stunZone: {fileID: 4794577528906004082}
+  player: {fileID: 0}
+  _walkSpeed: 3
+  targetRange: 4
 --- !u!1 &8530422271578506404
 GameObject:
   m_ObjectHideFlags: 0

@@ -70,10 +70,9 @@ public class spaceTouchDirection : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         touchCol = GetComponent<CapsuleCollider2D>();
-        //rb = GetComponent<Rigidbody2D>();
     }
     
-
+    //Keeps checking to see if the gameobject is grounded, on a wall or the ceilling of a scene
     void FixedUpdate()
     {
         isGrounded = touchCol.Cast(Vector2.down, castFilter, groundHit, groundDistance) > 0;

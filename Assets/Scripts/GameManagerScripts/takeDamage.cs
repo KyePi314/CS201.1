@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class takeDamage : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
+   
     Animator animator;
     [SerializeField]
     private int _maxHP;
@@ -20,7 +21,6 @@ public class takeDamage : MonoBehaviour
     private float lastHitTimer = 0;
     private float invincibiltyTimer = 0.25f;
     private int _hitPower;
-
     public int MaxHP
     {
         get
@@ -57,7 +57,7 @@ public class takeDamage : MonoBehaviour
             _hitPower = value;
         }
     }
-
+    
     public bool IsAlive
     {
         get
@@ -69,9 +69,9 @@ public class takeDamage : MonoBehaviour
         {
             _isAlive = value;
             animator.SetBool(AnimStrings.isAlive, value);
-            Debug.Log("IsAlive set " + value);
         }
     }
+   
     public bool LockVelocity
     {
         get
@@ -101,7 +101,7 @@ public class takeDamage : MonoBehaviour
 
             lastHitTimer += Time.deltaTime;
         }
-
+        
     }
     public bool Hit(int damage, Vector2 knockback)
     {

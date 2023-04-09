@@ -21,11 +21,17 @@ public class fadeRemove : StateMachineBehaviour
         objRemoved = animator.gameObject;
     }
 
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timeElapsed += Time.deltaTime;
+        float newAlpha = startColor.a * (1 - (timeElapsed / timer));
+        spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
 
-
+        if (timeElapsed > timer)
+        {
+            Destroy(objRemoved);
+        }
     }
+
 }
