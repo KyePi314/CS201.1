@@ -10,6 +10,14 @@ public class takeDamage : MonoBehaviour
     public UnityEvent<int, Vector2> damageableHit;
    
     Animator animator;
+    public float timer = 0.5f;
+
+    private float timeElapsed = 0;
+    LevelSystem levelSystem;
+    EnemyLevels enemyLevels;
+    SpriteRenderer spriteRenderer;
+    GameObject objRemoved;
+    Color startColor;
     [SerializeField]
     private int _maxHP;
     [SerializeField]
@@ -86,8 +94,8 @@ public class takeDamage : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-
-        
+        levelSystem = GameObject.Find("Player").GetComponent<LevelSystem>();
+        enemyLevels = GetComponent<EnemyLevels>();
     }
     public void Update()
     {
@@ -101,7 +109,23 @@ public class takeDamage : MonoBehaviour
 
             lastHitTimer += Time.deltaTime;
         }
-        
+        if (!IsAlive && gameObject.tag.Equals("Enemy"))
+        {
+            Debug.Log("Player got XP " + enemyLevels.enemyXP);
+            timeElapsed = 0f;
+            spriteRenderer = animator.GetComponent<SpriteRenderer>();
+            startColor = spriteRenderer.color;
+            objRemoved = animator.gameObject;
+
+            timeElapsed += Time.deltaTime;
+            float newAlpha = startColor.a * (1 - (timeElapsed / timer));
+            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
+
+            if (timeElapsed > timer)
+            {
+                Destroy(objRemoved);
+            }
+        }
     }
     public bool Hit(int damage, Vector2 knockback)
     {
@@ -114,6 +138,12 @@ public class takeDamage : MonoBehaviour
             if (CurrentHealth <= 0)
             {
                 IsAlive = false;
+                if (gameObject.tag.Equals("Enemy"))
+                {
+                    levelSystem.updateXP(enemyLevels.enemyXP);
+                    
+                }
+                
             }
            
             damageableHit?.Invoke(damage, knockback);

@@ -176,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7423515989646260210, guid: 68a4d54d581e92440bebd491df407d77, type: 3}
       propertyPath: m_Name
-      value: ratEnemy
+      value: Rat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a4d54d581e92440bebd491df407d77, type: 3}
@@ -233,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7423515989646260210, guid: 68a4d54d581e92440bebd491df407d77, type: 3}
       propertyPath: m_Name
-      value: ratEnemy
+      value: Rat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a4d54d581e92440bebd491df407d77, type: 3}

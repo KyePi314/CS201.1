@@ -9,7 +9,6 @@ public class enemyMovement : MonoBehaviour
     public DetectionZone attackZone;
     public DetectionZone stunZone;
     spaceTouchDirection touchDirection;
-    private enemyMovement movement;
     public Transform player;
     takeDamage damage;
     Animator animator;
@@ -112,7 +111,7 @@ public class enemyMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         damage = GetComponent<takeDamage>();
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        movement = GetComponent<enemyMovement>();
+
     }
     // Update is called once per frame
     private void Update()
@@ -182,7 +181,7 @@ public class enemyMovement : MonoBehaviour
         }
         IsStunned = true;
        
-        Debug.Log("Enemy" + isStunned);
+        Debug.Log("Enemy" + isStunned.ToString());
         StartCoroutine(StunnedTime());
     }
     IEnumerator StunnedTime()
@@ -212,4 +211,5 @@ public class enemyMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
     }
+
 }

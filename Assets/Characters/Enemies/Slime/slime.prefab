@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: -7123337426161850074}
   - component: {fileID: -3034189597188531733}
   - component: {fileID: -7066500467814456005}
+  - component: {fileID: -2569577959665002722}
   m_Layer: 8
   m_Name: slime
   m_TagString: Enemy
@@ -207,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edgeZone: {fileID: 1726289554798174508}
   attackZone: {fileID: 9125782655343931544}
-  stunZone: {fileID: 0}
+  stunZone: {fileID: 140234459082939240}
   player: {fileID: 0}
   _walkSpeed: 2
   targetRange: 2
@@ -288,6 +289,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  timer: 0.5
   _maxHP: 90
   _health: 90
   _isAlive: 1
@@ -308,6 +310,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.086096816, y: -0.38120958}
   m_Size: {x: 1.3172425, y: 1.2261195}
   m_Direction: 1
+--- !u!114 &-2569577959665002722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677450464798712048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c17d12b64195c499d9c2477a996beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyXP: 10
+  enemyLevel: 1
 --- !u!1 &4697559088701620239
 GameObject:
   m_ObjectHideFlags: 0

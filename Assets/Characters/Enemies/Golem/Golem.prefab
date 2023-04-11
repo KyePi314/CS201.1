@@ -237,6 +237,7 @@ GameObject:
   - component: {fileID: 7316186244117951944}
   - component: {fileID: 8739426854462781146}
   - component: {fileID: 3194856605280232016}
+  - component: {fileID: 4465994863294301630}
   m_Layer: 8
   m_Name: Golem
   m_TagString: Enemy
@@ -408,6 +409,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  timer: 0.5
   _maxHP: 110
   _health: 110
   _isAlive: 1
@@ -450,6 +452,20 @@ MonoBehaviour:
   player: {fileID: 0}
   _walkSpeed: 3
   targetRange: 4
+--- !u!114 &4465994863294301630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8301922181359707207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c17d12b64195c499d9c2477a996beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyXP: 10
+  enemyLevel: 1
 --- !u!1 &8530422271578506404
 GameObject:
   m_ObjectHideFlags: 0
