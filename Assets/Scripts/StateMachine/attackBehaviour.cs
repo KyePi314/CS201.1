@@ -5,7 +5,7 @@ using UnityEngine;
 public class attackBehaviour : StateMachineBehaviour
 {
     public string boolName;
-    public bool valueEnter, valueExit;
+    public bool valueOnEnter, valueOnExit;
     public bool updateOnState;
     public bool updateOnStateMachine;
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
@@ -13,7 +13,7 @@ public class attackBehaviour : StateMachineBehaviour
     {
         if (updateOnState) 
         {
-            animator.SetBool(boolName, valueEnter);
+            animator.SetBool(boolName, valueOnEnter);
         }
     }
 
@@ -28,7 +28,7 @@ public class attackBehaviour : StateMachineBehaviour
     {
         if (updateOnState)
         {
-            animator.SetBool(boolName, valueExit);
+            animator.SetBool(boolName, valueOnExit);
         }
     }
 
@@ -49,7 +49,7 @@ public class attackBehaviour : StateMachineBehaviour
     {
         if (updateOnStateMachine)
         {
-            animator.SetBool(boolName, valueEnter);
+            animator.SetBool(boolName, valueOnEnter);
         }
     }
 
@@ -58,7 +58,7 @@ public class attackBehaviour : StateMachineBehaviour
     {
         if (updateOnStateMachine)
         {
-            animator.SetBool(boolName, valueExit);
+            animator.SetBool(boolName, valueOnExit);
         }
     }
 }

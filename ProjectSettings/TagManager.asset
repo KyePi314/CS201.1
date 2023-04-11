@@ -13,6 +13,9 @@ TagManager:
   - Light
   - Enemy
   - edgeDetect
+  - Golem
+  - Rat
+  - target
   layers:
   - Default
   - TransparentFX

@@ -61,8 +61,8 @@ PolygonCollider2D:
     - - {x: 0.101261616, y: 0.47922707}
       - {x: 0.35087532, y: 0.14989188}
       - {x: 0.28016955, y: -0.1725167}
-      - {x: 0.55885375, y: -0.11465311}
-      - {x: 0.69067, y: 0.3234831}
+      - {x: 0.7891644, y: -0.18444419}
+      - {x: 0.7953565, y: 0.44212806}
 --- !u!114 &8358848994197183816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPower: 10
-  knockback: {x: 0, y: 0}
+  knockback: {x: 3, y: 1}
 --- !u!1 &3815933639978470510
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.07271242, y: 0.19720966}
+  m_Offset: {x: -0.27370894, y: 0.09048784}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -206,7 +206,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0743647, y: 0.8365332}
+  m_Size: {x: 0.54031396, y: 0.62308955}
   m_EdgeRadius: 0
 --- !u!114 &7645196233434697896
 MonoBehaviour:
@@ -233,13 +233,13 @@ GameObject:
   - component: {fileID: 7423515989646260209}
   - component: {fileID: -5750677283962945498}
   - component: {fileID: 3233200959123941473}
-  - component: {fileID: 230153299421756389}
   - component: {fileID: 4136906421431686845}
   - component: {fileID: 306113268103049971}
   - component: {fileID: 307546761849447282}
-  - component: {fileID: 871359424984514928}
+  - component: {fileID: 6750922929671682565}
+  - component: {fileID: 7450055912930127877}
   m_Layer: 8
-  m_Name: ratEnemy
+  m_Name: Rat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,6 +260,7 @@ Transform:
   - {fileID: 7155629002468242455}
   - {fileID: 15433070846005535}
   - {fileID: 8631674349527657988}
+  - {fileID: 2584777029337073268}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -352,21 +353,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.041521084, y: 0.037009656}
   m_Size: {x: 0.9674152, y: 0.50500834}
   m_Direction: 1
---- !u!114 &230153299421756389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7423515989646260210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 907b7e7c6cf642d42b9b1d5107640216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  edgeZone: {fileID: 6721327868929087963}
-  attackZone: {fileID: 7645196233434697896}
-  walkSpeed: 3
 --- !u!114 &4136906421431686845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,9 +416,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageableHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6750922929671682565}
+        m_TargetAssemblyTypeName: enemyMovement, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  timer: 0.5
+  _maxHP: 80
+  _health: 80
+  _isAlive: 1
   isInvincible: 0
---- !u!114 &871359424984514928
+--- !u!114 &6750922929671682565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -441,10 +443,103 @@ MonoBehaviour:
   m_GameObject: {fileID: 7423515989646260210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c989fd683a9d5247b0d318af14a0929, type: 3}
+  m_Script: {fileID: 11500000, guid: 6101b2152629da147a23334588996bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 80
-  _health: 80
-  _isAlive: 1
-  enemies: []
+  edgeZone: {fileID: 6721327868929087963}
+  attackZone: {fileID: 7645196233434697896}
+  stunZone: {fileID: 789454295177208161}
+  player: {fileID: 0}
+  _walkSpeed: 2
+  targetRange: 3
+--- !u!114 &7450055912930127877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423515989646260210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c17d12b64195c499d9c2477a996beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyXP: 10
+  enemyLevel: 1
+--- !u!1 &7484963104475179166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2584777029337073268}
+  - component: {fileID: 789454295177208161}
+  - component: {fileID: 1981907581510302187}
+  m_Layer: 10
+  m_Name: stunDetect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2584777029337073268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7484963104475179166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.02, y: 0.638, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7423515989646260208}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &789454295177208161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7484963104475179166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d36c2e7a82a294f97cea2f16f0b9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectedColliders: []
+--- !u!60 &1981907581510302187
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7484963104475179166}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.13572693, y: -0.19245696}
+      - {x: -0.30626827, y: -0.23691413}
+      - {x: -0.37450022, y: -0.52302134}
+      - {x: 0.08814192, y: -0.5074179}
+      - {x: 0.3701049, y: -0.5275755}
+      - {x: 0.3253436, y: -0.3371436}

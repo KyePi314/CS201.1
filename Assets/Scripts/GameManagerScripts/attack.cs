@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class attack : MonoBehaviour
 {
-    public int attackPower = 10;
+    public int attackPower;
     public Vector2 knockback = Vector2.zero;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
+    //This handles the player and enemies hitting power and detection
     private void OnTriggerEnter2D(Collider2D collision)
     {
         takeDamage damageable = collision.GetComponent<takeDamage>();
-        bool gotHit = damageable.Hit(attackPower, knockback);
+        
         if (damageable != null)
         {
-         if (gotHit)
+            //handles which direction the knock hits the object towards depending on the attacks faced direction
+            Vector2 confirmedKnockback = transform.parent.localScale.x > 0 ? knockback : new Vector2(-knockback.x, knockback.y);
+            bool gotHit = damageable.Hit(attackPower, confirmedKnockback);
+            if (gotHit)
             {
                 Debug.Log(collision.name + " hit for " + attackPower);
             }   

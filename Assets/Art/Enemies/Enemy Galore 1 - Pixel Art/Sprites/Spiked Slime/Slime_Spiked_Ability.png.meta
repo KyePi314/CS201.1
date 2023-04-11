@@ -59,7 +59,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -188,8 +188,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 725c765985649a230800000000000000
-      internalID: 3650526319238169895
+      spriteID: 95cd357af867b1441b54a24aadef841c
+      internalID: -1795968435
       vertices: []
       indices: 
       edges: []
@@ -209,8 +209,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cf5dd14b0e11eda0800000000000000
-      internalID: -5917415401689620539
+      spriteID: 6ffdb6b36f0accd49be11a4eb76e9811
+      internalID: 590090214
       vertices: []
       indices: 
       edges: []
@@ -230,8 +230,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e111423240b4d6f50800000000000000
-      internalID: 6876234687206134046
+      spriteID: 2283c99a38991c942a3c213c1b755fe2
+      internalID: -1526038230
       vertices: []
       indices: 
       edges: []
@@ -248,9 +248,9 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Slime_Spiked_Ability_0: -1165160126693205279
-      Slime_Spiked_Ability_1: 3650526319238169895
-      Slime_Spiked_Ability_2: -5917415401689620539
-      Slime_Spiked_Ability_3: 6876234687206134046
+      Slime_Spiked_Ability_1: -1795968435
+      Slime_Spiked_Ability_2: 590090214
+      Slime_Spiked_Ability_3: -1526038230
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

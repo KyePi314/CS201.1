@@ -12,8 +12,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     spaceTouchDirection touchDir;
-    takeDamage damageable;
-
+    takeDamage damage;
     //Variables for player controller
     Vector2 moveInput;
     public float walkSpeed = 5f;
@@ -28,6 +27,7 @@ public class PlayerController : MonoBehaviour
     //Used to access the animator and RigidBody components for objects with the playercontroller script attached to them (eg the player)
     Rigidbody2D rb;
     Animator animator;
+    
 
     //My getter and setters for managing the player movement, movement states and faced direction
     public bool IsMoving //Handles getting and setting whether or not the player is moving
@@ -126,16 +126,14 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchDir = GetComponent<spaceTouchDirection>();
-        damageable = GetComponent<takeDamage>();
-
-        
+        damage = GetComponent<takeDamage>();
     }
     private void Update()
     {
     }
     private void FixedUpdate()
     {
-        if(!damageable.IsHit)
+        if(!damage.LockVelocity)
         {
             //Sets how fast the player is moving based off which move state its in (run, walk etc)
             rb.velocity = new Vector2(moveInput.x * currentSpeed, rb.velocity.y);

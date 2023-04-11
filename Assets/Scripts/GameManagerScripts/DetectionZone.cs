@@ -6,6 +6,7 @@ using UnityEngine;
 //This script handles dealing with specific collider triggers and detection zones such as hitboxes etc
 public class DetectionZone : MonoBehaviour
 {
+
     public List<Collider2D> detectedColliders = new List<Collider2D>();
     Collider2D col;
 

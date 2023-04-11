@@ -18,6 +18,9 @@ internal class AnimStrings
     internal static string moveAllowed = "moveAllowed";
     internal static string isAlive = "isAlive";
     internal static string seeTarget = "seeTarget";
-    internal static string isHit = "isHit";
+    internal static string hitTrigger = "hit";
+    internal static string lockVelocity = "lockVelocity";
+    internal static string attackCooldown = "attackCooldown";
+    internal static string isStunned = "isStunned";
 }
 
