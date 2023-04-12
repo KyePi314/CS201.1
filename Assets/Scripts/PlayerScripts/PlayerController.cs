@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     spaceTouchDirection touchDir;
-    takeDamage damage;
+    damageManager damage;
     //Variables for player controller
     Vector2 moveInput;
     public float walkSpeed = 5f;
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchDir = GetComponent<spaceTouchDirection>();
-        damage = GetComponent<takeDamage>();
+        damage = GetComponent<damageManager>();
     }
     private void Update()
     {

@@ -10,7 +10,7 @@ public class enemyMovement : MonoBehaviour
     public DetectionZone stunZone;
     spaceTouchDirection touchDirection;
     public Transform player;
-    takeDamage damage;
+    damageManager damage;
     Animator animator;
     Rigidbody2D rb;
 
@@ -109,7 +109,7 @@ public class enemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         touchDirection = GetComponent<spaceTouchDirection>();
         animator = GetComponent<Animator>();
-        damage = GetComponent<takeDamage>();
+        damage = GetComponent<damageManager>();
         player = GameObject.FindWithTag("Player").GetComponent<Transform>();
 
     }
@@ -146,6 +146,7 @@ public class enemyMovement : MonoBehaviour
             if (moveAllowed && AttackCooldown == 0)
             {
                 rb.velocity = new Vector2(walkSpeed * moveDirectionV.x, rb.velocity.y);
+
                 if (currentDist <= targetRange)
                 {
                     if (Mathf.Abs(this.transform.position.y - player.transform.position.y) < 0.5f) //checking to make sure that they will only follow a player if they are on a similar y level as them, otherwise the enemy would continue to track a player even if they were above them if they were still in range.
@@ -160,8 +161,6 @@ public class enemyMovement : MonoBehaviour
                         }
                         transform.position = Vector2.MoveTowards(this.transform.position, new Vector2(player.position.x, transform.position.y), walkSpeed * Time.deltaTime);
                     }
-                    
-                   
                 }
             }
             else 
@@ -180,10 +179,10 @@ public class enemyMovement : MonoBehaviour
             return;
         }
         IsStunned = true;
-       
         Debug.Log("Enemy" + isStunned.ToString());
         StartCoroutine(StunnedTime());
     }
+    //Handles how long the enemy is stunned for.
     IEnumerator StunnedTime()
     {
         yield return new WaitForSeconds(1.5f);
