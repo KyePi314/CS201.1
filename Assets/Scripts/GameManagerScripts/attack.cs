@@ -5,12 +5,13 @@ using UnityEngine;
 public class attack : MonoBehaviour
 {
     public int attackPower;
+
     public Vector2 knockback = Vector2.zero;
     
     //This handles the player and enemies hitting power and detection
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        takeDamage damageable = collision.GetComponent<takeDamage>();
+        damageManager damageable = collision.GetComponent<damageManager>();
         
         if (damageable != null)
         {

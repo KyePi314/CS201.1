@@ -429,11 +429,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  timer: 0.5
   _maxHP: 80
   _health: 80
   _isAlive: 1
   isInvincible: 0
+  timer: 0.5
 --- !u!114 &6750922929671682565
 MonoBehaviour:
   m_ObjectHideFlags: 0

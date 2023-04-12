@@ -5,19 +5,17 @@ using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class takeDamage : MonoBehaviour
+public class damageManager : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
-   
+    //Object references etc
     Animator animator;
-    public float timer = 0.5f;
-
-    private float timeElapsed = 0;
     LevelSystem levelSystem;
     EnemyLevels enemyLevels;
     SpriteRenderer spriteRenderer;
     GameObject objRemoved;
     Color startColor;
+    //Variables
     [SerializeField]
     private int _maxHP;
     [SerializeField]
@@ -29,6 +27,9 @@ public class takeDamage : MonoBehaviour
     private float lastHitTimer = 0;
     private float invincibiltyTimer = 0.25f;
     private int _hitPower;
+    public float timer = 0.5f;
+    private float timeElapsed = 0;
+
     public int MaxHP
     {
         get
@@ -65,7 +66,7 @@ public class takeDamage : MonoBehaviour
             _hitPower = value;
         }
     }
-    
+
     public bool IsAlive
     {
         get
@@ -79,7 +80,7 @@ public class takeDamage : MonoBehaviour
             animator.SetBool(AnimStrings.isAlive, value);
         }
     }
-   
+
     public bool LockVelocity
     {
         get
@@ -141,11 +142,11 @@ public class takeDamage : MonoBehaviour
                 if (gameObject.tag.Equals("Enemy"))
                 {
                     levelSystem.updateXP(enemyLevels.enemyXP);
-                    
+
                 }
-                
+
             }
-           
+
             damageableHit?.Invoke(damage, knockback);
             return true;
 
@@ -154,9 +155,7 @@ public class takeDamage : MonoBehaviour
         {
             return false;
         }
-           
-        
-    }
 
+    }
 
 }
