@@ -446,11 +446,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6101b2152629da147a23334588996bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgeZone: {fileID: 6645270865133426631}
+  FlipDirection: {fileID: 6645270865133426631}
   attackZone: {fileID: 1708933058976004451}
   stunZone: {fileID: 4794577528906004082}
   player: {fileID: 0}
-  _walkSpeed: 3
+  _speed: 3
   targetRange: 4
 --- !u!114 &4465994863294301630
 MonoBehaviour:

@@ -206,11 +206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6101b2152629da147a23334588996bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edgeZone: {fileID: 1726289554798174508}
+  FlipDirection: {fileID: 1726289554798174508}
   attackZone: {fileID: 9125782655343931544}
   stunZone: {fileID: 140234459082939240}
   player: {fileID: 0}
-  _walkSpeed: 2
+  _speed: 0
   targetRange: 2
 --- !u!50 &7278247354043921221
 Rigidbody2D:

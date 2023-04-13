@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Caves-3.unity
     guid: 2b03835aa8ebfad4f898cd52cf8559a4
+  - enabled: 1
+    path: Assets/Scenes/TreeTops.unity
+    guid: 9001258dce5294f4c9c221d8f9ab2ab4
   m_configObjects: {}

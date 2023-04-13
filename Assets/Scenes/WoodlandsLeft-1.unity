@@ -9658,7 +9658,7 @@ GameObject:
   - component: {fileID: 1588807929}
   - component: {fileID: 1588807930}
   m_Layer: 0
-  m_Name: Trees-1
+  m_Name: TreeTops
   m_TagString: Spawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9744,7 +9744,7 @@ GameObject:
   - component: {fileID: 1597929292}
   - component: {fileID: 1597929291}
   m_Layer: 0
-  m_Name: Trees-1
+  m_Name: TreeTops
   m_TagString: SceneExits
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
