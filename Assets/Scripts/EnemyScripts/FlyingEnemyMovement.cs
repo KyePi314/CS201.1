@@ -69,6 +69,10 @@ public class FlyingEnemyMovement : MonoBehaviour
     private void Update()
     {
         seesTarget = attackDetect.detectedColliders.Count > 0;
+        if (AttackCooldown > 0)
+        {
+            AttackCooldown -= Time.deltaTime;
+        }
     }
     private void FixedUpdate()
     {
@@ -87,12 +91,15 @@ public class FlyingEnemyMovement : MonoBehaviour
 
     private void Flight()
     {
-        float playerDist = Vector3.Distance(player.transform.position, transform.position);
+        //Getting the distance and direction to the waypoints and the player
+        float playerDist = Vector2.Distance(player.transform.position, this.transform.position);
+        Vector2 playerDirection = (player.position - transform.position).normalized;
         Vector2 directToWayPoint = (nextPoint.position - transform.position).normalized;
         float dist = Vector2.Distance(nextPoint.position, transform.position);
         rb.velocity = directToWayPoint * flySpeed;
         flightDirection();
-        if (dist <= waypointReachDist)
+        //If the player isn't in range, the bat's default mode has it flying between set waypoints
+        if (dist <= waypointReachDist && playerDist > targetRange)
         {
             wayPointNum++;
 
@@ -103,17 +110,15 @@ public class FlyingEnemyMovement : MonoBehaviour
 
             nextPoint = waypoints[wayPointNum];
         }
+        //chases the player when the player is within range
         else if (playerDist <= targetRange)
             {
-
-                if (Mathf.Abs(this.transform.position.y - player.transform.position.y) < 1f) //checking to make sure that they will only follow a player if they are on a similar y level as them, otherwise the enemy would continue to track a player even if they were above them if they were still in range.
-                {
-
-                transform.position = Vector3.MoveTowards(transform.position, player.transform.position, flySpeed * Time.deltaTime);
-                }
+                rb.velocity = playerDirection * flySpeed;
+                flightDirection();
             }
         
     }
+    //handles flipping the direction that the sprite is facing based off the direction its moving
     private void flightDirection()
     {
         Vector3 scale = transform.localScale;

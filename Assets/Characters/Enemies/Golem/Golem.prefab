@@ -409,6 +409,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  changedHealth:
+    m_PersistentCalls:
+      m_Calls: []
   _maxHP: 110
   _health: 110
   _isAlive: 1
@@ -446,11 +449,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6101b2152629da147a23334588996bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlipDirection: {fileID: 6645270865133426631}
+  edgeZone: {fileID: 6645270865133426631}
   attackZone: {fileID: 1708933058976004451}
   stunZone: {fileID: 4794577528906004082}
   player: {fileID: 0}
-  _speed: 3
+  _walkSpeed: 3
   targetRange: 4
 --- !u!114 &4465994863294301630
 MonoBehaviour:

@@ -206,11 +206,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6101b2152629da147a23334588996bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FlipDirection: {fileID: 1726289554798174508}
+  edgeZone: {fileID: 1726289554798174508}
   attackZone: {fileID: 9125782655343931544}
   stunZone: {fileID: 140234459082939240}
   player: {fileID: 0}
-  _speed: 0
+  _walkSpeed: 2
   targetRange: 2
 --- !u!50 &7278247354043921221
 Rigidbody2D:
@@ -289,6 +289,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  changedHealth:
+    m_PersistentCalls:
+      m_Calls: []
   _maxHP: 90
   _health: 90
   _isAlive: 1
