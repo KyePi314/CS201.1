@@ -30,9 +30,9 @@ public class SceneLoaderManager : MonoBehaviour
         //Handles ensuring that the object that uses this script doesn't get destroyed when a scene loads, allowing its data to move between scenes 
         DontDestroyOnLoad(gameObject);
         //Need to find a better way of executing the below code but it works for now, even if its not as simple as it should be and does double up
-        if (SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            spawnPoint = new Vector2(-6.14f, -2.64f);
+            spawnPoint = new Vector2(-6.14f, -2.2f);
         }
         else
         {
@@ -52,14 +52,10 @@ public class SceneLoaderManager : MonoBehaviour
         spawnPlayer(spawnPoint);
     }
 
-   
-
     public void SceneSwap()
     {
         StartCoroutine(LoadSceneAsync()); //Calls the method that starts loading the scene 
     }
-
-
 
     IEnumerator LoadSceneAsync()
     {
@@ -88,7 +84,6 @@ public class SceneLoaderManager : MonoBehaviour
            else
            {
                spawnPoint = Vector2.zero;
-               //player.transform.position = spawnPointTest;
            }
     }
 

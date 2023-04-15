@@ -10,10 +10,15 @@ public class LevelSystem : MonoBehaviour
     [SerializeField]
     private int CurrentLevel;
     private int xpToNextLevel;
-    
+    public int CurrentXP
+    {
+        get { return currentXP; }
+        set { currentXP = value; }
+    }
     public int PlayerLevel
     {
         get { return CurrentLevel; }
+        set { CurrentLevel = value; }
     }
     private void Awake()
     {

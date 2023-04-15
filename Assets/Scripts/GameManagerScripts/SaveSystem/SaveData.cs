@@ -6,5 +6,5 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    public int CurrentHealth = 100;
+    public PlayerSaveData playerSaveData = new PlayerSaveData();
 }
