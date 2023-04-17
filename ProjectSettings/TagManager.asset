@@ -16,6 +16,7 @@ TagManager:
   - Golem
   - Rat
   - target
+  - flyingEnemy
   layers:
   - Default
   - TransparentFX

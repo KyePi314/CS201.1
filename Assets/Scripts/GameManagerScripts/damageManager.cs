@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class damageManager : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
+    public UnityEvent<int, int> changedHealth;
     //Object references etc
     Animator animator;
     LevelSystem levelSystem;
@@ -51,7 +52,7 @@ public class damageManager : MonoBehaviour
         set
         {
             _health = value;
-
+            changedHealth?.Invoke(_health, MaxHP);
         }
     }
     public int attackHit

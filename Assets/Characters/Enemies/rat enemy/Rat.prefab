@@ -451,7 +451,7 @@ MonoBehaviour:
   stunZone: {fileID: 789454295177208161}
   player: {fileID: 0}
   _walkSpeed: 2
-  targetRange: 3
+  targetRange: 4
 --- !u!114 &7450055912930127877
 MonoBehaviour:
   m_ObjectHideFlags: 0

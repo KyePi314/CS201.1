@@ -21,7 +21,7 @@ public class enemyMovement : MonoBehaviour
     float currentDist;
     //The target range will vary enemy to enemy. Some enemy's may be 'blinder' than others. For example, something like a golem would have far better eyesight than the cave d
     public float targetRange;
-    
+
     //saves the moving direction
     public enum moveDirection { Right, Left }
     //variables to handle movement direction
@@ -41,7 +41,7 @@ public class enemyMovement : MonoBehaviour
     public float walkSpeed
     {
         get { return _walkSpeed; }
-        
+
     }
     public bool IsStunned
     {
@@ -92,12 +92,12 @@ public class enemyMovement : MonoBehaviour
         }
     }
     //sets a cooldown for between attacks so the enemy can't keep attacking and give the player no chance to counter or escape
-    public float AttackCooldown 
-    { 
-        get 
+    public float AttackCooldown
+    {
+        get
         {
-           return animator.GetFloat(AnimStrings.attackCooldown);
-        } 
+            return animator.GetFloat(AnimStrings.attackCooldown);
+        }
         private set
         {
             animator.SetFloat(AnimStrings.attackCooldown, Mathf.Max(value, 0));
@@ -116,7 +116,7 @@ public class enemyMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-       
+
         seesTarget = attackZone.detectedColliders.Count > 0;
         if (stunZone.detectedColliders.Count > 0 && gameObject.tag.Equals("Enemy"))
         {
@@ -135,7 +135,7 @@ public class enemyMovement : MonoBehaviour
     {
         //In fixedupdate is the code that handles the enemy's actual movement. this triggers them to move across their area, and if the player comes within a certain range, sets their movement to go towards said player
         currentDist = Vector2.Distance(transform.position, player.transform.position);
-        
+
         if (touchDirection.isGrounded && touchDirection.isOnWall || edgeZone.detectedColliders.Count == 0)
         {
             ChangeDirection();
@@ -163,13 +163,13 @@ public class enemyMovement : MonoBehaviour
                     }
                 }
             }
-            else 
+            else
             {
                 //when engaging in attacking the player, the enemy cannot move and will slide to a stop, rather than just stopping abruptly 
                 rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, stopRate), rb.velocity.y);
             }
         }
-        
+
     }
     //Stuns the enemy when the player jumps on their head
     public void enemyStunned()
@@ -188,7 +188,7 @@ public class enemyMovement : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         IsStunned = false;
     }
-   
+
     //used in changing the direction that the enemy is facing
     public void ChangeDirection()
     {

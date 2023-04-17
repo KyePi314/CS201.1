@@ -27,6 +27,7 @@ public class FindPlayerAtStart : MonoBehaviour
     private void Awake()
     {
         vCam = GetComponent<CinemachineVirtualCamera>();
+        vCam.m_Follow = GameObject.Find("Player").transform;
     }
 
     private void OnEnable()
