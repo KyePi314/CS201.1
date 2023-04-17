@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("Player").GetComponent<damageManager>();
-        if (player == null )
+        if (player == null)
         {
             Debug.LogWarning("No Player in scene");
         }

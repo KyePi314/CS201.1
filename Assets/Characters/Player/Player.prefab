@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 671694452579175191}
   - component: {fileID: 8515876768505973056}
   - component: {fileID: 6688456827662622426}
+  - component: {fileID: 333495617785208967}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -294,6 +295,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 49ea5196-c5d2-4fd5-9e21-4ab1619af15e
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e11f07fd-8120-43d4-b7f2-15c72641ddcc
+    m_ActionName: Player/Save[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -409,6 +414,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15c71a964842714bb141483e1c7b37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &333495617785208967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5142206337650483533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f3b80b4cf723c546b3f04cf00dea22b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sparks: 0
 --- !u!1 &8228828195138274237
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class attack : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         damageManager damageable = collision.GetComponent<damageManager>();
-        
+        //Add a check for if the player has a sword before they can use attack
         if (damageable != null)
         {
             //handles which direction the knock hits the object towards depending on the attacks faced direction

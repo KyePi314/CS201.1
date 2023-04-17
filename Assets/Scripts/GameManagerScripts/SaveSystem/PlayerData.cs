@@ -20,10 +20,7 @@ public class PlayerData : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Transform>();
         levelSystem = GameObject.Find("Player").GetComponent<LevelSystem>();
         spriteRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            spawnPos = new Vector2(-6.14f, -2.20f);
-        }
+        
     }
     // Update is called once per frame
     void Update()
@@ -81,8 +78,7 @@ public class PlayerData : MonoBehaviour
         //If the player is starting a new game they'll have no set position so this puts them at the default
         if (SaveManager.CurrentSaveData.playerSaveData.CurrentScene == 0)
         {
-            spriteRenderer.enabled = true;
-            player.transform.position = spawnPos;
+            player.transform.position = new Vector2(-6.14f, -1f); ;
         }
         //If the player is loading a game, this sets them at their saved position
         else
@@ -107,5 +103,6 @@ public struct PlayerSaveData
     public int level;
     public Vector2 playerPos;
     public int CurrentScene;
+    public int numOfSparks;
     //add a public int killCount?
 }
