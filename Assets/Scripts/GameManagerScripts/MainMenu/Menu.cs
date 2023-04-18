@@ -19,7 +19,6 @@ public class Menu : MonoBehaviour
     public void OnNewGameClicked()
     {
         //Sets the current scene to the menu so the game knows to set the player's position to its default starting point
-        SaveManager.CurrentSaveData.playerSaveData.CurrentScene = 0;
         SaveManager.NewGame();
         player.SceneLoad(1);
         DisableAllButtons();

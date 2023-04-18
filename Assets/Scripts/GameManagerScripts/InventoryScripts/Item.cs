@@ -4,29 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
-
 public class Item
 {
     public int id;
-    public string name;
+    public string title;
     public string description;
     public Sprite icon;
+    public int slotNum;
+    public int itemAmount = 1;
+
     //Storing stats for different items
     public Dictionary<string, int> stats = new Dictionary<string, int>();
-    public Item(int id, string name, string description,Dictionary<string, int> stats)
+
+    public Item(int id, int itemAmount, int slotNum, string title, string description,Dictionary<string, int> stats)
     {
         this.id = id;
-        this.name = name;
+        this.itemAmount = itemAmount;
+        this.slotNum = slotNum;
+        this.title = title;
         this.description = description;
-        this.icon = Resources.Load<Sprite>("Items/" + name);
+        this.icon = Resources.Load<Sprite>("Sprites/Items/" + title);
         this.stats = stats;
+      
     }
     public Item(Item item)
     {
         this.id = item.id;
-        this.name = item.name;
+        this.itemAmount = item.itemAmount;
+        this.slotNum = item.slotNum;
+        this.title = item.title;
         this.description= item.description; 
-        this.icon = Resources.Load<Sprite>("Items/" + item.name);
+        this.icon = Resources.Load<Sprite>("Sprites/Items/" + item.title);
         this.stats = item.stats;
     }
 }

@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
 {
@@ -10,8 +12,10 @@ public class InventoryScript : MonoBehaviour
     
     private int sparks;
     SparkCounter counter;
+    public UIitem uiItems;
     public List<Item> PlayerItems = new List<Item>();
     public ItemDatabase itemDatabase;
+    public UIinventory inventory;
     private static InventoryScript inventoryInstance;
     public int Sparks
     {
@@ -42,8 +46,8 @@ public class InventoryScript : MonoBehaviour
     }
     private void Start()
     {
-         
     }
+    
     // Update is called once per frame
     void Update()
     {
@@ -52,29 +56,30 @@ public class InventoryScript : MonoBehaviour
         {
             counter = GameObject.Find("SparkCounter").GetComponent<SparkCounter>();
             counter.OnSparkCollection(sparks);
-
+            itemDatabase = GameObject.FindWithTag("ItemDatabase").GetComponent<ItemDatabase>(); 
+            inventory = GameObject.Find("Inventory").GetComponent<UIinventory>();
         }
-        
+
     }
     //Gets the items based off the ID
     public void GiveItems(int id)
     {
         Item itemToGive = itemDatabase.GetItem(id);
+        inventory.AddNewItem(itemToGive);
         PlayerItems.Add(itemToGive);
-        Debug.Log("Added item: " + itemToGive.id);
     }
 
     //Gives the items based off the name
     public void GiveItems(string name)
     {
         Item itemToGive = itemDatabase.GetItem(name);
+        inventory.AddNewItem(itemToGive);
         PlayerItems.Add(itemToGive);
-        Debug.Log("Added item " + itemToGive.name);
     }
     //Checks to see if an item is in the inventory
     public Item CheckForItems(int id)
     {
-        return PlayerItems.Find(item =>  item.id == id);
+        return PlayerItems.Find(item => item.id == id);
     }
     //Removes items from the inventory
     public void RemoveItem(int id)
@@ -82,8 +87,9 @@ public class InventoryScript : MonoBehaviour
         Item item = CheckForItems(id);
         if (item != null)
         {
+            inventory.RemoveItem(item);
             PlayerItems.Remove(item);
-            Debug.Log("Item Removed" + item.name);
+            Debug.Log("Item Removed" + item.title);
         }
     }
     public void CollectSparks()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DontDestroy : MonoBehaviour
 {
-    public DontDestroy Instance;
+    public static DontDestroy Instance;
 
     private void Start()
     {

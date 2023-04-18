@@ -50,7 +50,8 @@ public static class SaveManager
         var dir = Application.persistentDataPath + saveDirectory;
         if (Directory.Exists(dir))
         {
-            File.WriteAllText(dir + Filename, "");
+            string json = JsonUtility.ToJson(CurrentSaveData.playerSaveData.CurrentScene, true);
+            File.WriteAllText(dir + Filename, json);
         }
     }
 }

@@ -258,6 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2469303215968971556}
   - component: {fileID: 1667346020189616720}
+  - component: {fileID: 1753477523886958927}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -309,11 +310,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.8867924, g: 0.28271723, b: 0.27189392, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.8862746, g: 0.28235295, b: 0.27058825, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -327,7 +328,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 4209828740526316509}
   m_FillRect: {fileID: 3567755549956895558}
   m_HandleRect: {fileID: 0}
@@ -335,10 +336,25 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1753477523886958927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561797364474930644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d562952fcb0164da708ffeda1fb1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthText: {fileID: 3446466588951222728}
+  healthSlider: {fileID: 1667346020189616720}
+  player: {fileID: 0}
 --- !u!1 &7835615265098411155
 GameObject:
   m_ObjectHideFlags: 0
