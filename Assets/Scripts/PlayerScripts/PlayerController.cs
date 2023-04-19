@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 
 /*This script handles the player's movements and how they react to different input
@@ -11,6 +12,8 @@ using UnityEngine.InputSystem;
  * */
 public class PlayerController : MonoBehaviour
 {
+    UIinventory uiInv;
+    InventoryScript inventory;
     spaceTouchDirection touchDir;
     damageManager damage;
     //Variables for player controller
@@ -23,13 +26,18 @@ public class PlayerController : MonoBehaviour
     public float jumpimpulse = 5f;
     public float airSpeed = 5f;
     private bool doubleJump;
-
+    private int currentItemName;
     //Used to access the animator and RigidBody components for objects with the playercontroller script attached to them (eg the player)
     Rigidbody2D rb;
     Animator animator;
     
 
     //My getter and setters for managing the player movement, movement states and faced direction
+    public int CurrentItemName
+    {
+        get { return currentItemName; }
+        set { currentItemName = value; }
+    }
     public bool IsMoving //Handles getting and setting whether or not the player is moving
     {
         get
@@ -123,6 +131,8 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
+        uiInv = GameObject.Find("Inventory").GetComponent<UIinventory>();
+        inventory = GetComponent<InventoryScript>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchDir = GetComponent<spaceTouchDirection>();
@@ -206,6 +216,48 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void onUse(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            for (int i = 0; i < inventory.PlayerItems.Count; i++)
+            {
+                if (inventory.PlayerItems[i].id == currentItemName)
+                {
+                    //For now, only the health items will have functions, and maybe the potion. 
+                    foreach (var stat in inventory.PlayerItems[i].stats)
+                    {
+                        //Allows players to use healing items
+                        if (stat.Key == "Regen")
+                        {
+                            //Adds the correct amount of regen to the player's health
+                            damage.CurrentHealth += stat.Value;
+                            //Makes sure that the correct item is being deleted from the player's inventory when it is used
+                            var t = inventory.PlayerItems.Find(x => x.stats.ContainsValue(stat.Value));
+                            uiInv.RemoveItem(t);
+                            inventory.RemoveItem(t.id);
+                            break;
+                        }
+                        else if (stat.Key == "moveSpeed")
+                        {
+                            //Set a timer for this at some point
+                            walkSpeed += stat.Value;
+                            //Makes sure that the correct item is being deleted from the player's inventory when it is used
+                            var t = inventory.PlayerItems.Find(x => x.stats.ContainsValue(stat.Value));
+                            uiInv.RemoveItem(t);
+                            inventory.RemoveItem(t.id);
+                            break;
+                        }
+                    }
+
+                    Debug.Log("Done " + inventory.PlayerItems[i].title);
+                }
+            }
+        }
+        
+
+        Debug.Log(CurrentItemName);
+    }
     public void onHit(int damage, Vector2 knockback)
     {
         rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);

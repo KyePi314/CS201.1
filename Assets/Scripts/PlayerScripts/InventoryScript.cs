@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,24 +43,20 @@ public class InventoryScript : MonoBehaviour
     }
     private void Awake()
     {
-        
         inventoryInstance = this;
+        counter = GameObject.Find("SparkCounter").GetComponent<SparkCounter>();
+        
+        itemDatabase = GameObject.FindWithTag("ItemDatabase").GetComponent<ItemDatabase>();
+        inventory = GameObject.Find("Inventory").GetComponent<UIinventory>();
     }
     private void Start()
     {
+        GiveItems("Sword");
     }
     
     // Update is called once per frame
     void Update()
     {
-        //Waits until the game loads to start handling spark collection or finding the text component to update.
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            counter = GameObject.Find("SparkCounter").GetComponent<SparkCounter>();
-            counter.OnSparkCollection(sparks);
-            itemDatabase = GameObject.FindWithTag("ItemDatabase").GetComponent<ItemDatabase>(); 
-            inventory = GameObject.Find("Inventory").GetComponent<UIinventory>();
-        }
 
     }
     //Gets the items based off the ID
@@ -92,9 +90,35 @@ public class InventoryScript : MonoBehaviour
             Debug.Log("Item Removed" + item.title);
         }
     }
+    
     public void CollectSparks()
     {
         sparks++;
-        
+        counter.OnSparkCollection(sparks);
     }
 }
+/*TO-DO:
+ * Figure out how to save the inventory as part of the save/load feature
+ * 
+*/
+
+
+//Code for saving/loading inventory?:
+
+//[System.Serializable]
+//public struct InventorySaveData
+//{
+//    public La inventorySave;
+//    public string test;
+//    public string getJson()
+//    {
+//        return JsonUtility.ToJson(inventorySave);
+//    }
+//}
+
+//public void saveInv()
+//{
+//    saveData.inventorySave = PlayerItems.Count;
+
+//    Debug.Log("Test" +  " " + saveData.inventorySave + "");
+//}

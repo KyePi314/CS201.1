@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/*TO-DO: After Prototype
+ * Rework the main menu and game management systems now I have a better understanding of them so that I dont have to have the player or the UI for the game screen in the main menu
+ * */
 public class Menu : MonoBehaviour
 {
     public PlayerData player;

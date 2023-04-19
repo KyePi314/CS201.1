@@ -1736,7 +1736,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &358820719
 GameObject:
@@ -15531,6 +15531,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5235181020291445662, guid: 478db7ad3cad8f24596ddc7e05d26df5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 30.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235181020291445662, guid: 478db7ad3cad8f24596ddc7e05d26df5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.47
+      objectReference: {fileID: 0}
     - target: {fileID: 7367102975192721384, guid: 478db7ad3cad8f24596ddc7e05d26df5, type: 3}
       propertyPath: m_Name
       value: Spark

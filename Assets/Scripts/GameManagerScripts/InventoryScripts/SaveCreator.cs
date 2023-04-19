@@ -19,8 +19,12 @@ public class SaveCreator : MonoBehaviour
     {
         if (saveTrigger)
         {
+            //Saves the game at the save point
             if (Input.GetKeyDown(KeyCode.E))
             {
+                AudioSource saved = GameObject.Find("SaveSound").GetComponent<AudioSource>();
+                var savedPlay = saved.clip;
+                saved.PlayOneShot(savedPlay);
                 playerData.SavePlayerData();
             }
         }

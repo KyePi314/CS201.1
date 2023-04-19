@@ -14,12 +14,20 @@ public class UIinventory : MonoBehaviour
     public Transform slotPanel;
     private int itemAmount;
     InventoryScript inv;
-    public string slotName;
+    public List<int> slotNum;
+    private int slotNumber;
     int numSlots = 10;
+
+
+    public int SlotNumber
+    {
+        get { return slotNumber; }
+        set { slotNumber = value; }
+    }
 
     private void Awake()
     {
-        
+        SlotNumber = 0;
         inv = GameObject.Find("Player").GetComponent<InventoryScript>();
         //Setting up to correct amount of inventory slots
         for (int i = 0; i < numSlots; i++)
@@ -40,16 +48,25 @@ public class UIinventory : MonoBehaviour
         //Shows or hides items
         uIitems[slot].UpdateItem(item);
         //Now updates the counter object to match the name of the object its actually counting!
+        if (item !=  null)
+        {
+            uIitems[slot].GetComponentInChildren<TMP_Text>().name = item.title;
+            //Sets the inital amount
+            item.itemAmount = itemAmount;
+            uIitems[slot].GetComponentInChildren<TMP_Text>().text = item.itemAmount.ToString();
+            SlotNumber++;
+            item.slotNum = SlotNumber;
+        }
+        else
+        {
+            itemAmount = 0;
+            uIitems[slot].GetComponentInChildren<TMP_Text>().text = itemAmount.ToString();
+        }
         
-        uIitems[slot].GetComponentInChildren<TMP_Text>().name = item.title;
-        counters.Add(uIitems[slot].GetComponentInChildren<TMP_Text>().name);
-        Debug.Log(uIitems[slot].GetComponentInChildren<TMP_Text>().name);
-        //Sets the inital amount
-        item.itemAmount = itemAmount;
-        uIitems[slot].GetComponentInChildren<TMP_Text>().text =item.itemAmount.ToString();
     }
     private void Update()
     {
+        
     }
     //Adds new items to the inventory UI 
     public void AddNewItem(Item item)
@@ -92,14 +109,14 @@ public class UIinventory : MonoBehaviour
                 //Updates the text to this new amount
                 var txt = uIitems[i].GetComponentInChildren<TMP_Text>();
                 txt.text = item.itemAmount.ToString();
-                Debug.Log(item.title + " " + item.itemAmount + " " + counters[i] + " " + uIitems[i].GetComponentInChildren<TMP_Text>().name);
                 break;
             }
         }
-        
     }
     public void RemoveItem(Item item)
     {
+        Debug.Log("Removed correct item" + item.title);
+
         //removes items
         UpdateSlot(uIitems.FindIndex(i => i.item == item), null);
     }

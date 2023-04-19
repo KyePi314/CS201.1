@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour
 {
+    InventoryScript inv;
     SpriteRenderer spriteRenderer;
     SceneLoaderManager sceneLoaderManager;
     Transform player;
@@ -12,9 +14,11 @@ public class PlayerData : MonoBehaviour
     LevelSystem levelSystem;
     Vector2 spawnPos;
     private PlayerSaveData playerSave = new PlayerSaveData();
+    //private InventorySaveData inventorySave = new InventorySaveData();
     
     private void Awake()
     {   
+        inv = GameObject.Find("Player").GetComponent<InventoryScript>();
         sceneLoaderManager = GameObject.Find("GameManager").GetComponent<SceneLoaderManager>();
         playerStats = GameObject.Find("Player").GetComponent<damageManager>();
         player = GameObject.Find("Player").GetComponent<Transform>();
@@ -38,6 +42,15 @@ public class PlayerData : MonoBehaviour
     //Saves the player's data
     public void SavePlayerData()
     {
+        //For now just saving the sword item if the player has it so they can attack
+        for (int i = 0; i < inv.PlayerItems.Count; i++)
+        {
+            if (inv.PlayerItems[i].title == "Sword")
+            {
+                playerSave.swordName = inv.PlayerItems[i].title;
+            }
+        }
+        playerSave.numOfSparks = inv.Sparks;
         playerSave.playerPos = player.transform.position;
         playerSave.MaxHP = playerStats.MaxHP;
         playerSave.CurrentHealth = playerStats.CurrentHealth;
@@ -56,11 +69,16 @@ public class PlayerData : MonoBehaviour
         SaveManager.LoadGame();
         playerSave = SaveManager.CurrentSaveData.playerSaveData;
         SceneLoad(playerSave.CurrentScene);
+        inv.Sparks = playerSave.numOfSparks;
         playerStats.CurrentHealth = playerSave.CurrentHealth;
         playerStats.MaxHP = playerSave.MaxHP;
         levelSystem.CurrentXP = playerSave.XP;
         levelSystem.PlayerLevel = playerSave.level;
-       
+        inv.Sparks = playerSave.numOfSparks;
+        if (playerSave.swordName != null)
+        {
+            //add code here
+        }
         playerStats.IsAlive = true;    }
     //Loads the scene which holds the last save point
     public void SceneLoad(int scene)
@@ -104,5 +122,7 @@ public struct PlayerSaveData
     public Vector2 playerPos;
     public int CurrentScene;
     public int numOfSparks;
+    public string swordName;
+    public string test;
     //add a public int killCount?
 }

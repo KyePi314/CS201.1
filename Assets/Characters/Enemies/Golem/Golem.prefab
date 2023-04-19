@@ -412,11 +412,15 @@ MonoBehaviour:
   changedHealth:
     m_PersistentCalls:
       m_Calls: []
+  Coin: {fileID: 7500010906746079056, guid: 536648cdd396d1e43b140b7a03e19e7f, type: 3}
+  Meat: {fileID: 5389497224342532829, guid: 6fe642388af2cf04aa884ea4cc62ad2f, type: 3}
+  SpeedPotion: {fileID: 2862677777775627075, guid: fd033c6a5466c0f4796cd5f56672f0d7, type: 3}
   _maxHP: 110
   _health: 110
   _isAlive: 1
   isInvincible: 0
   timer: 0.5
+  ItemDrop: []
 --- !u!95 &8739426854462781146
 Animator:
   serializedVersion: 5

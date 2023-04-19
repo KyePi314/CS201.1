@@ -528,6 +528,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5235181020291445662, guid: 478db7ad3cad8f24596ddc7e05d26df5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 36.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235181020291445662, guid: 478db7ad3cad8f24596ddc7e05d26df5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.99
+      objectReference: {fileID: 0}
     - target: {fileID: 7367102975192721384, guid: 478db7ad3cad8f24596ddc7e05d26df5, type: 3}
       propertyPath: m_Name
       value: Spark
@@ -5476,7 +5484,7 @@ Transform:
   - {fileID: 1996670356}
   - {fileID: 1247443381}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1383690233
 GameObject:
