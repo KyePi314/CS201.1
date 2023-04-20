@@ -61,6 +61,7 @@ public class UIinventory : MonoBehaviour
         {
             itemAmount = 0;
             uIitems[slot].GetComponentInChildren<TMP_Text>().text = itemAmount.ToString();
+            uIitems[slot].GetComponentInChildren<TMP_Text>().name = "";
         }
         
     }

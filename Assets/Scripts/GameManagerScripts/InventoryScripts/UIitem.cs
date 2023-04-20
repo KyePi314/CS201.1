@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
+//Handles how the items look in the slot, generating the correct image
 public class UIitem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item;
     private Image spriteImage;
     private ToolTip toolTip;
+
+    
 
     private void Awake()
     {

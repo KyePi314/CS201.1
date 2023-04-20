@@ -21,7 +21,7 @@ public class SparkCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        counterText.text = player.Sparks + " / 10";
+        counterText.text = player.Sparks + " / 8";
     }
     // Update is called once per frame
     void Update()
@@ -30,6 +30,6 @@ public class SparkCounter : MonoBehaviour
     }
     public void OnSparkCollection(int sparks)
     {
-        counterText.text = sparks + " / 10";
+        counterText.text = sparks + " / 8";
     }
 }

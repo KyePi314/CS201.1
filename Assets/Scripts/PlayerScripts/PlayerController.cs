@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     damageManager damage;
     //Variables for player controller
     Vector2 moveInput;
+    private int statValue;
     public float walkSpeed = 5f;
     public float runSpeed = 8f;
     private bool _isMoving = false;
@@ -230,22 +231,13 @@ public class PlayerController : MonoBehaviour
                         //Allows players to use healing items
                         if (stat.Key == "Regen")
                         {
-                            //Adds the correct amount of regen to the player's health
-                            damage.CurrentHealth += stat.Value;
-                            //Makes sure that the correct item is being deleted from the player's inventory when it is used
-                            var t = inventory.PlayerItems.Find(x => x.stats.ContainsValue(stat.Value));
-                            uiInv.RemoveItem(t);
-                            inventory.RemoveItem(t.id);
+                            statValue = stat.Value;
                             break;
                         }
                         else if (stat.Key == "moveSpeed")
                         {
                             //Set a timer for this at some point
-                            walkSpeed += stat.Value;
-                            //Makes sure that the correct item is being deleted from the player's inventory when it is used
-                            var t = inventory.PlayerItems.Find(x => x.stats.ContainsValue(stat.Value));
-                            uiInv.RemoveItem(t);
-                            inventory.RemoveItem(t.id);
+                            statValue = stat.Value;
                             break;
                         }
                     }
@@ -253,10 +245,41 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Done " + inventory.PlayerItems[i].title);
                 }
             }
+            itemEffects();
         }
         
-
         Debug.Log(CurrentItemName);
+    }
+
+    public void itemEffects()
+    {
+        //Adds the correct amount of regen to the player's health
+        damage.CurrentHealth += statValue;
+
+        //Makes sure that the correct item is being deleted from the player's inventory when it is used, and that the correct amount is being taken away, when the item amount equals zero, the item is removed from the inventory slot
+        for (int i = 0; i < inventory.PlayerItems.Count; i++) 
+        {
+            var t = inventory.PlayerItems.Find(x => x.stats.ContainsValue(statValue));
+            if (t == inventory.PlayerItems[i])
+            {
+                if (inventory.PlayerItems[i].itemAmount > 0)
+                {
+                    inventory.PlayerItems[i].itemAmount -= 1;
+                    Debug.LogWarning(inventory.PlayerItems[i].itemAmount);
+                    break;
+                }
+                else if (inventory.PlayerItems[i].itemAmount == 0)
+                {
+                    inventory.RemoveItem(t.id);
+                    break;
+                }
+
+            }
+           
+        }
+       
+
+        
     }
     public void onHit(int damage, Vector2 knockback)
     {

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 333495617785208967}
   - component: {fileID: 542632769882987498}
   - component: {fileID: 8635893308603612041}
+  - component: {fileID: -6169091224772003193}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -401,10 +402,8 @@ MonoBehaviour:
   changedHealth:
     m_PersistentCalls:
       m_Calls: []
-  drops:
-  - {fileID: 7500010906746079056, guid: 536648cdd396d1e43b140b7a03e19e7f, type: 3}
-  - {fileID: 5389497224342532829, guid: 6fe642388af2cf04aa884ea4cc62ad2f, type: 3}
-  - {fileID: 2862677777775627075, guid: fd033c6a5466c0f4796cd5f56672f0d7, type: 3}
+  Coin: {fileID: 0}
+  Meat: {fileID: 0}
   SpeedPotion: {fileID: 0}
   _maxHP: 100
   _health: 100
@@ -438,6 +437,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15c71a964842714bb141483e1c7b37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSave:
+    MaxHP: 0
+    CurrentHealth: 0
+    XP: 0
+    level: 0
+    playerPos: {x: 0, y: 0}
+    CurrentScene: 0
+    numOfSparks: 0
+    swordName: 
+    test: 
 --- !u!114 &333495617785208967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,6 +571,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: 
+--- !u!114 &-6169091224772003193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5142206337650483533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84129d8403b0cb4cb53304c5eeab7cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 0}
 --- !u!1 &8228828195138274237
 GameObject:
   m_ObjectHideFlags: 0

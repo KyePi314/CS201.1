@@ -120,21 +120,22 @@ public class damageManager : MonoBehaviour
 
             lastHitTimer += Time.deltaTime;
         }
-        if (!IsAlive && gameObject.tag.Equals("Enemy") || gameObject.tag.Equals("flyingEnemy"))
+        if (!IsAlive && gameObject.tag.Equals("Enemy"))
         {
-            timeElapsed = 0f;
-            spriteRenderer = animator.GetComponent<SpriteRenderer>();
-            startColor = spriteRenderer.color;
-            objRemoved = animator.gameObject;
+            
+            //timeElapsed = 0f;
+            //spriteRenderer = animator.GetComponent<SpriteRenderer>();
+            //startColor = spriteRenderer.color;
+            //objRemoved = animator.gameObject;
 
-            timeElapsed += Time.deltaTime;
-            float newAlpha = startColor.a * (1 - (timeElapsed / timer));
-            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
+            //timeElapsed += Time.deltaTime;
+            //float newAlpha = startColor.a * (1 - (timeElapsed / timer));
+            ////spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
 
-            if (timeElapsed > timer)
-            {
-                Destroy(objRemoved);
-            }
+            //if (timeElapsed > timer)
+            //{
+            //    Destroy(objRemoved);
+            //}
         }
     }
     public bool Hit(int damage, Vector2 knockback)
@@ -158,6 +159,7 @@ public class damageManager : MonoBehaviour
                 if (gameObject.tag.Equals("Enemy") || gameObject.tag.Equals("flyingEnemy"))
                 {
                     levelSystem.updateXP(enemyLevels.enemyXP);
+                    Destroy(gameObject, 0.5f);
                     RandomLoot();
                 }
 
@@ -178,13 +180,14 @@ public class damageManager : MonoBehaviour
     {
         
         //Gets a random number between 1 and 3
-        int rndNum = Random.Range(1, 3);
+        int rndNum = Random.Range(1, 4);
         //Checks which number has been saved from the number randomizer and uses that to spawn in the prefab item that will be dropped as loot from the enemy
         if (rndNum == 1)
         {
            
             Prefab = Instantiate(Coin, transform.position, Quaternion.identity);
             Prefab.name = "Coin";
+            
         }
         else if (rndNum == 2)
         {
@@ -196,13 +199,11 @@ public class damageManager : MonoBehaviour
             Prefab = Instantiate(SpeedPotion, transform.position, Quaternion.identity);
             Prefab.name = "SpeedPotion";
         }
+        else if (rndNum == 4)
+        {
+            //nothingg gets dropped
+        }
         Prefab.tag = "Collectable";
-        
         Debug.Log(rndNum.ToString());
-    }
-    public void lootDrop(string loot)
-    {
-        Debug.Log(loot);
-        
     }
 }
