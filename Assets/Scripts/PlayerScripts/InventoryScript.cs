@@ -51,7 +51,7 @@ public class InventoryScript : MonoBehaviour
     }
     private void Start()
     {
-        GiveItems("Sword");
+        
     }
     
     // Update is called once per frame

@@ -12,6 +12,5 @@ public class FollowMouse : MonoBehaviour
     private void Update()
     {
         transform.position = Input.mousePosition;
-        Debug.Log("Mouse here");
     }
 }

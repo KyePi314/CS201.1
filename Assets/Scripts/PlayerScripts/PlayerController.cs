@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        
     }
     private void FixedUpdate()
     {
@@ -265,12 +266,12 @@ public class PlayerController : MonoBehaviour
                 if (inventory.PlayerItems[i].itemAmount > 0)
                 {
                     inventory.PlayerItems[i].itemAmount -= 1;
-                    Debug.LogWarning(inventory.PlayerItems[i].itemAmount);
                     break;
                 }
                 else if (inventory.PlayerItems[i].itemAmount == 0)
                 {
                     inventory.RemoveItem(t.id);
+                    uiInv.RemoveItem(t);
                     break;
                 }
 

@@ -19,6 +19,7 @@ TagManager:
   - flyingEnemy
   - ItemDatabase
   - Collectable
+  - Quest
   layers:
   - Default
   - TransparentFX
@@ -32,7 +33,7 @@ TagManager:
   - PlayerHitbox
   - EnemyHitbox
   - edgeDetection
-  - 
+  - NPC
   - 
   - 
   - 
@@ -64,6 +65,9 @@ TagManager:
     locked: 0
   - name: Enemies
     uniqueID: 2845239117
+    locked: 0
+  - name: NPC
+    uniqueID: 3314312975
     locked: 0
   - name: Player
     uniqueID: 2978259453

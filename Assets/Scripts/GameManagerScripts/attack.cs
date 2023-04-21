@@ -5,9 +5,27 @@ using UnityEngine;
 public class attack : MonoBehaviour
 {
     public int attackPower;
-
+    InventoryScript inventory;
     public Vector2 knockback = Vector2.zero;
-    
+
+    private void Awake()
+    {
+        inventory = GameObject.Find("Player").GetComponent<InventoryScript>();
+    }
+    private void Start()
+    {
+        if (gameObject.name == "Player")
+        {
+            if (inventory.CheckForItems(0) == null)
+            {
+                attackPower = 0;
+            }
+            else if (inventory.CheckForItems(0)  != null)
+            {
+                attackPower = 10;
+            }
+        }
+    }
     //This handles the player and enemies hitting power and detection
     private void OnTriggerEnter2D(Collider2D collision)
     {
