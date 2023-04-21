@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using Unity.VisualScripting;
 
-public static class SaveManager 
+public static class SaveManager
 {
     public static SaveData CurrentSaveData = new SaveData();
     public const string saveDirectory = "/savedData/";
@@ -43,14 +43,16 @@ public static class SaveManager
         }
 
         CurrentSaveData = temp;
-    } 
+    }
 
     public static void NewGame()
     {
         var dir = Application.persistentDataPath + saveDirectory;
         if (Directory.Exists(dir))
         {
-            File.WriteAllText(dir + Filename, "");
+            var change = CurrentSaveData.playerSaveData.CurrentScene = 0;
+            string json = JsonUtility.ToJson(change.ToString(), true);
+            File.WriteAllText(dir + Filename, json);
         }
     }
 }

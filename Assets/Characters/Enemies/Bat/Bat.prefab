@@ -123,7 +123,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.1370492, y: 0.11602646}
+  m_Offset: {x: -0.1612342, y: 0.16365159}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -134,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2740984, y: 1.3621169}
+  m_Size: {x: 0.6775315, y: 0.8958924}
   m_EdgeRadius: 0
 --- !u!114 &7768939620180444741
 MonoBehaviour:
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 2617367984762071490}
   m_Layer: 8
   m_Name: Bat
-  m_TagString: flyingEnemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,11 +312,18 @@ MonoBehaviour:
   damageableHit:
     m_PersistentCalls:
       m_Calls: []
+  changedHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  Coin: {fileID: 7500010906746079056, guid: 536648cdd396d1e43b140b7a03e19e7f, type: 3}
+  Meat: {fileID: 5389497224342532829, guid: 6fe642388af2cf04aa884ea4cc62ad2f, type: 3}
+  SpeedPotion: {fileID: 2862677777775627075, guid: fd033c6a5466c0f4796cd5f56672f0d7, type: 3}
   _maxHP: 90
   _health: 90
   _isAlive: 1
   isInvincible: 0
   timer: 0.5
+  ItemDrop: []
 --- !u!70 &3434704022438509739
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -389,7 +396,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5186040317851824883}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -407,18 +414,19 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.15434685, y: 0.3505786}
+    - - {x: 0.12492862, y: 0.3726424}
       - {x: -0.1285471, y: 0.3805427}
       - {x: -0.02587846, y: 0.26817915}
       - {x: -0.054125816, y: -0.1166873}
       - {x: -0.13070908, y: -0.3598122}
       - {x: -0.4072675, y: -0.45498312}
-      - {x: -0.33063674, y: -0.7109945}
-      - {x: -0.012591302, y: -0.7908482}
-      - {x: 0.2324839, y: -0.6471132}
-      - {x: 0.32931408, y: -0.47741482}
-      - {x: 0.45557842, y: -0.09667355}
-      - {x: 0.34512815, y: 0.14981475}
+      - {x: -0.55762136, y: -0.65133286}
+      - {x: -0.024322242, y: -0.9096815}
+      - {x: 0.38786897, y: -0.766317}
+      - {x: 0.62048596, y: -0.5208691}
+      - {x: 0.61970735, y: -0.21779594}
+      - {x: 0.47404873, y: 0.19513202}
+      - {x: 0.3892555, y: 0.2748423}
 --- !u!114 &5233575761172552027
 MonoBehaviour:
   m_ObjectHideFlags: 0

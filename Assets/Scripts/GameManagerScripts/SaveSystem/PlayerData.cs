@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,21 +6,30 @@ using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour
 {
+    InventoryScript inv;
     SpriteRenderer spriteRenderer;
-    SceneLoaderManager sceneLoaderManager;
+    GameObject sceneLoaderManager;
     Transform player;
     damageManager playerStats;
     LevelSystem levelSystem;
     Vector2 spawnPos;
-    private PlayerSaveData playerSave = new PlayerSaveData();
+    GameStart gameStart;
+    public PlayerSaveData playerSave = new PlayerSaveData();
+    //private InventorySaveData inventorySave = new InventorySaveData();
     
     private void Awake()
-    {   
-        sceneLoaderManager = GameObject.Find("GameManager").GetComponent<SceneLoaderManager>();
+    {
+        gameStart = GameObject.Find("GameStarter").GetComponent<GameStart>();
+        inv = GameObject.Find("Player").GetComponent<InventoryScript>();
+        sceneLoaderManager = GameObject.Find("GameManager");
         playerStats = GameObject.Find("Player").GetComponent<damageManager>();
         player = GameObject.Find("Player").GetComponent<Transform>();
         levelSystem = GameObject.Find("Player").GetComponent<LevelSystem>();
         spriteRenderer = GameObject.Find("Player").GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         
     }
     // Update is called once per frame
@@ -30,14 +40,43 @@ public class PlayerData : MonoBehaviour
             //if the player dies, they are sent back to their last save point
             if (!playerStats.IsAlive)
             {
-                LoadPlayerData();
+                gameStart.LoadingScene();
             }
         }
 
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += SceneLoaded;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= SceneLoaded;
+    }
+
+    private void SceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == SaveManager.CurrentSaveData.playerSaveData.CurrentScene)
+        {
+            player.transform.position = SaveManager.CurrentSaveData.playerSaveData.playerPos;
+        }
+        else
+        {
+            player.transform.position = new Vector2(-6.14f, -2.2f);
+        }
+    }
     //Saves the player's data
     public void SavePlayerData()
     {
+        //For now just saving the sword item if the player has it so they can attack
+        for (int i = 0; i < inv.PlayerItems.Count; i++)
+        {
+            if (inv.PlayerItems[i].title == "Sword")
+            {
+                playerSave.swordName = inv.PlayerItems[i].title;
+            }
+        }
+        playerSave.numOfSparks = inv.Sparks;
         playerSave.playerPos = player.transform.position;
         playerSave.MaxHP = playerStats.MaxHP;
         playerSave.CurrentHealth = playerStats.CurrentHealth;
@@ -50,48 +89,20 @@ public class PlayerData : MonoBehaviour
     //Loads the player's data
     public void LoadPlayerData()
     {
-        //Disables the sceneloadermanager as it was overriding the player spawn pos
-        sceneLoaderManager.enabled = false;
-        Debug.Log(playerSave.CurrentScene);
-        SaveManager.LoadGame();
         playerSave = SaveManager.CurrentSaveData.playerSaveData;
-        SceneLoad(playerSave.CurrentScene);
+        inv.Sparks = playerSave.numOfSparks;
         playerStats.CurrentHealth = playerSave.CurrentHealth;
         playerStats.MaxHP = playerSave.MaxHP;
         levelSystem.CurrentXP = playerSave.XP;
         levelSystem.PlayerLevel = playerSave.level;
-       
-        playerStats.IsAlive = true;    }
-    //Loads the scene which holds the last save point
-    public void SceneLoad(int scene)
-    {
-        StartCoroutine(LoadSceneAsync(scene));
+        inv.Sparks = playerSave.numOfSparks;
+        if (playerSave.swordName != null)
+        {
+            //add code here
+        }
+        playerStats.IsAlive = true;    
     }
-    //Waits until the scene has loaded and has found the save point before loading
-    IEnumerator LoadSceneAsync(int scene)
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene); 
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-        //If the player is starting a new game they'll have no set position so this puts them at the default
-        if (SaveManager.CurrentSaveData.playerSaveData.CurrentScene == 0)
-        {
-            player.transform.position = new Vector2(-6.14f, -1f); ;
-        }
-        //If the player is loading a game, this sets them at their saved position
-        else
-        {
-            player.transform.position = playerSave.playerPos;
-        }
-        //Once the level is loaded the player's sprite is enabled and the sceneloadermanager is enabled again
-        if (asyncLoad.isDone)
-        {
-            spriteRenderer.enabled = true;
-            sceneLoaderManager.enabled = true;
-        }
-    }
+
 
 }
 [System.Serializable]
@@ -104,5 +115,7 @@ public struct PlayerSaveData
     public Vector2 playerPos;
     public int CurrentScene;
     public int numOfSparks;
+    public string swordName;
+    public string test;
     //add a public int killCount?
 }

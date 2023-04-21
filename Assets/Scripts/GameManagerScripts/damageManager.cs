@@ -4,17 +4,24 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class damageManager : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
     public UnityEvent<int, int> changedHealth;
     //Object references etc
+    ItemDatabase inv;
     Animator animator;
     LevelSystem levelSystem;
     EnemyLevels enemyLevels;
     SpriteRenderer spriteRenderer;
     GameObject objRemoved;
+    public GameObject Coin;
+    public GameObject Meat;
+    public GameObject SpeedPotion;
+    AudioSource hitSound;
+    GameObject Prefab;
     Color startColor;
     //Variables
     [SerializeField]
@@ -30,7 +37,7 @@ public class damageManager : MonoBehaviour
     private int _hitPower;
     public float timer = 0.5f;
     private float timeElapsed = 0;
-
+    public List<Transform> ItemDrop = new List<Transform>();
     public int MaxHP
     {
         get
@@ -95,9 +102,11 @@ public class damageManager : MonoBehaviour
     }
     private void Awake()
     {
+        inv = GameObject.Find("ItemDatabase").GetComponent<ItemDatabase>();
         animator = GetComponent<Animator>();
         levelSystem = GameObject.Find("Player").GetComponent<LevelSystem>();
         enemyLevels = GetComponent<EnemyLevels>();
+        hitSound = GameObject.Find("Player").GetComponent<AudioSource>();
     }
     public void Update()
     {
@@ -113,37 +122,45 @@ public class damageManager : MonoBehaviour
         }
         if (!IsAlive && gameObject.tag.Equals("Enemy"))
         {
-            Debug.Log("Player got XP " + enemyLevels.enemyXP);
-            timeElapsed = 0f;
-            spriteRenderer = animator.GetComponent<SpriteRenderer>();
-            startColor = spriteRenderer.color;
-            objRemoved = animator.gameObject;
+            
+            //timeElapsed = 0f;
+            //spriteRenderer = animator.GetComponent<SpriteRenderer>();
+            //startColor = spriteRenderer.color;
+            //objRemoved = animator.gameObject;
 
-            timeElapsed += Time.deltaTime;
-            float newAlpha = startColor.a * (1 - (timeElapsed / timer));
-            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
+            //timeElapsed += Time.deltaTime;
+            //float newAlpha = startColor.a * (1 - (timeElapsed / timer));
+            ////spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
 
-            if (timeElapsed > timer)
-            {
-                Destroy(objRemoved);
-            }
+            //if (timeElapsed > timer)
+            //{
+            //    Destroy(objRemoved);
+            //}
         }
     }
     public bool Hit(int damage, Vector2 knockback)
     {
         if (IsAlive && !isInvincible)
         {
+            //Plays sound on the object being hit
+            var beenHit = hitSound.clip;
+            hitSound.PlayOneShot(beenHit);
             CurrentHealth -= damage;
             isInvincible = true;
             animator.SetTrigger(AnimStrings.hitTrigger);
             LockVelocity = true;
             if (CurrentHealth <= 0)
             {
+                //Plays sound on death
+                AudioSource deathSound = GameObject.Find("DeathSound").GetComponent<AudioSource>();
+                var playSound = deathSound.clip;
+                deathSound.PlayOneShot(playSound);
                 IsAlive = false;
-                if (gameObject.tag.Equals("Enemy"))
+                if (gameObject.tag.Equals("Enemy") || gameObject.tag.Equals("flyingEnemy"))
                 {
                     levelSystem.updateXP(enemyLevels.enemyXP);
-
+                    Destroy(gameObject, 0.5f);
+                    RandomLoot();
                 }
 
             }
@@ -159,4 +176,34 @@ public class damageManager : MonoBehaviour
 
     }
 
+    public void RandomLoot()
+    {
+        
+        //Gets a random number between 1 and 3
+        int rndNum = Random.Range(1, 4);
+        //Checks which number has been saved from the number randomizer and uses that to spawn in the prefab item that will be dropped as loot from the enemy
+        if (rndNum == 1)
+        {
+           
+            Prefab = Instantiate(Coin, transform.position, Quaternion.identity);
+            Prefab.name = "Coin";
+            
+        }
+        else if (rndNum == 2)
+        {
+            Prefab = Instantiate(Meat, transform.position, Quaternion.identity);
+            Prefab.name = "Meat";
+        }
+        else if (rndNum == 3)
+        {
+            Prefab = Instantiate(SpeedPotion, transform.position, Quaternion.identity);
+            Prefab.name = "SpeedPotion";
+        }
+        else if (rndNum == 4)
+        {
+            //nothingg gets dropped
+        }
+        Prefab.tag = "Collectable";
+        Debug.Log(rndNum.ToString());
+    }
 }

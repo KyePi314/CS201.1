@@ -1,8 +1,12 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InventoryScript : MonoBehaviour
 {
@@ -10,8 +14,10 @@ public class InventoryScript : MonoBehaviour
     
     private int sparks;
     SparkCounter counter;
+    public UIitem uiItems;
     public List<Item> PlayerItems = new List<Item>();
     public ItemDatabase itemDatabase;
+    public UIinventory inventory;
     private static InventoryScript inventoryInstance;
     public int Sparks
     {
@@ -37,44 +43,41 @@ public class InventoryScript : MonoBehaviour
     }
     private void Awake()
     {
-        
         inventoryInstance = this;
+        counter = GameObject.Find("SparkCounter").GetComponent<SparkCounter>();
+        
+        itemDatabase = GameObject.FindWithTag("ItemDatabase").GetComponent<ItemDatabase>();
+        inventory = GameObject.Find("Inventory").GetComponent<UIinventory>();
     }
     private void Start()
     {
-         
+        GiveItems("Sword");
     }
+    
     // Update is called once per frame
     void Update()
     {
-        //Waits until the game loads to start handling spark collection or finding the text component to update.
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            counter = GameObject.Find("SparkCounter").GetComponent<SparkCounter>();
-            counter.OnSparkCollection(sparks);
 
-        }
-        
     }
     //Gets the items based off the ID
     public void GiveItems(int id)
     {
         Item itemToGive = itemDatabase.GetItem(id);
+        inventory.AddNewItem(itemToGive);
         PlayerItems.Add(itemToGive);
-        Debug.Log("Added item: " + itemToGive.id);
     }
 
     //Gives the items based off the name
     public void GiveItems(string name)
     {
         Item itemToGive = itemDatabase.GetItem(name);
+        inventory.AddNewItem(itemToGive);
         PlayerItems.Add(itemToGive);
-        Debug.Log("Added item " + itemToGive.name);
     }
     //Checks to see if an item is in the inventory
     public Item CheckForItems(int id)
     {
-        return PlayerItems.Find(item =>  item.id == id);
+        return PlayerItems.Find(item => item.id == id);
     }
     //Removes items from the inventory
     public void RemoveItem(int id)
@@ -82,13 +85,40 @@ public class InventoryScript : MonoBehaviour
         Item item = CheckForItems(id);
         if (item != null)
         {
+            inventory.RemoveItem(item);
             PlayerItems.Remove(item);
-            Debug.Log("Item Removed" + item.name);
+            Debug.Log("Item Removed" + item.title);
         }
     }
+    
     public void CollectSparks()
     {
         sparks++;
-        
+        counter.OnSparkCollection(sparks);
     }
 }
+/*TO-DO:
+ * Figure out how to save the inventory as part of the save/load feature
+ * 
+*/
+
+
+//Code for saving/loading inventory?:
+
+//[System.Serializable]
+//public struct InventorySaveData
+//{
+//    public La inventorySave;
+//    public string test;
+//    public string getJson()
+//    {
+//        return JsonUtility.ToJson(inventorySave);
+//    }
+//}
+
+//public void saveInv()
+//{
+//    saveData.inventorySave = PlayerItems.Count;
+
+//    Debug.Log("Test" +  " " + saveData.inventorySave + "");
+//}

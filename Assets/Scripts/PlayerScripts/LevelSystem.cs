@@ -44,7 +44,7 @@ public class LevelSystem : MonoBehaviour
             {
                 stats.MaxHP += 5;
             }
-            //new level message
+            //new level message to be added here
         }
 
         xpToNextLevel = (int)(50f * (Mathf.Pow(CurrentLevel + 1, 2) - (5 * (CurrentLevel + 1)) + 8));

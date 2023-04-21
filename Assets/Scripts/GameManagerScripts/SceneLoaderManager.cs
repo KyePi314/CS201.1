@@ -13,24 +13,24 @@ public class SceneLoaderManager : MonoBehaviour
     //Game objects and objects of other classes
     public SceneExit sceneLoad;
     public GameObject[] spawnPoints; //An array for all spawn points in the new scene
-    public GameObject player; 
+    public Transform player; 
 
     public static SceneLoaderManager Instance {  get; private set; } //Used to ensure that the gameManager object that is attached to this script isnt destroyed or duplicated
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if (Instance != null)
-        {
-            Destroy(gameObject); //Checks for any duplications and deletes them, allowing there to only be one instance of GameManager object in the scene.
-        }
-        //Handles ensuring that the object that uses this script doesn't get destroyed when a scene loads, allowing its data to move between scenes 
-        DontDestroyOnLoad(gameObject);
+        //if (Instance == null)
+        //{
+        //    Instance = this;
+        //}
+        //else if (Instance != null)
+        //{
+        //    Destroy(gameObject); //Checks for any duplications and deletes them, allowing there to only be one instance of GameManager object in the scene.
+        //}
+        ////Handles ensuring that the object that uses this script doesn't get destroyed when a scene loads, allowing its data to move between scenes 
+        //DontDestroyOnLoad(gameObject);
         //Need to find a better way of executing the below code but it works for now, even if its not as simple as it should be and does double up
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             spawnPoint = new Vector2(-6.14f, -2.2f);
         }
@@ -48,7 +48,7 @@ public class SceneLoaderManager : MonoBehaviour
                 }
             }
         }
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player").GetComponent<Transform>(); ;
         spawnPlayer(spawnPoint);
     }
 

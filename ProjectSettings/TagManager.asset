@@ -17,6 +17,8 @@ TagManager:
   - Rat
   - target
   - flyingEnemy
+  - ItemDatabase
+  - Collectable
   layers:
   - Default
   - TransparentFX
