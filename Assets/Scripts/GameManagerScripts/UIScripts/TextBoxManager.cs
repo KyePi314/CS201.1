@@ -17,11 +17,9 @@ public class TextBoxManager : MonoBehaviour
     public bool isActive = false;
     public bool canMove;
 
-    public PlayerController player;
     private void Awake()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
-        animator = player.GetComponent<Animator>();
+       
         TextBox = GameObject.Find("DialogBox");
         speechText = TextBox.GetComponentInChildren<TMP_Text>();
     }

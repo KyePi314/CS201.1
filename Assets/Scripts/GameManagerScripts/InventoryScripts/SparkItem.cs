@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class SparkItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    KeepObjectsDestroyed collected;
+    private void Awake()
     {
-        
+        collected = GameObject.Find("DestroyedObjManager").GetComponent<KeepObjectsDestroyed>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
+            AudioSource clip = gameObject.GetComponent<AudioSource>();
+            var pickup = clip.clip;
+            AudioSource.PlayClipAtPoint(pickup, transform.position);
             InventoryScript.InventoryInstance.CollectSparks();
-            Debug.Log("Spark collected!");
+            collected.objects.Add(this.gameObject.name);
             Destroy(this.gameObject);    
         }
     }

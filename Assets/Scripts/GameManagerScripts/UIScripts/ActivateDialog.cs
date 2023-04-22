@@ -5,20 +5,25 @@ using UnityEngine;
 public class ActivateDialog : MonoBehaviour
 {
     public TextAsset textAssest;
-
+    private string s;
     public int startLine;
     public int endLine;
     public bool pressKey;
+    private bool PlayerReward = false;
     private bool waitForPress;
     public TextBoxManager textBox;
     public bool destroyAfterSpeech;
+    KeepObjectsDestroyed destroyed;
+    LevelSystem levels;
     QuestsManager questsManager;
-    InventoryScript checkForSword;
+    InventoryScript playerInv;
     // Start is called before the first frame update
     void Start()
     {
+        destroyed = GameObject.Find("DestroyedObjManager").GetComponent<KeepObjectsDestroyed>();
+        levels = GameObject.Find("Player").GetComponent<LevelSystem>();
         questsManager = GameObject.Find("QuestManager").GetComponent<QuestsManager>();
-        checkForSword = GameObject.Find("Player").GetComponent<InventoryScript>();
+        playerInv = GameObject.Find("Player").GetComponent<InventoryScript>();
         textBox = FindObjectOfType<TextBoxManager>();
     }
 
@@ -32,12 +37,33 @@ public class ActivateDialog : MonoBehaviour
             textBox.textLine = startLine;
             textBox.lastLine = endLine;
             //If the player has no sword (the start of the game) the first npc will give them one.
-            if (checkForSword.CheckForItems(0) == null)
+            if (playerInv.CheckForItems(0) == null)
             {
-                checkForSword.GiveItems(0);
+                playerInv.GiveItems(0);
             }
             textBox.EnableSpeech();
-             
+
+             for (int i = 0; i < questsManager.activeQuests.Count; i++)
+            {
+
+                ActivateDialog[] obj = GameObject.FindObjectsOfType<ActivateDialog>();
+                for (int j = 0; j < obj.Length; j++)
+                {
+                    if (obj[j].name == questsManager.activeQuests[i])
+                    {
+                        PlayerReward = true;
+                        questsManager.FinishQuest = obj[j].name;
+                        questsManager.questCompleted = true;
+                        break;
+                    }
+                }
+
+                if (PlayerReward)
+                {
+                    GivePlayerReward();
+                }
+                
+            }
             
             waitForPress = false;
             if (destroyAfterSpeech)
@@ -56,16 +82,22 @@ public class ActivateDialog : MonoBehaviour
                 waitForPress = true;
                 return;
             }
-            textBox.ReloadSpeechScript(textAssest);
-            textBox.textLine = startLine;
-            textBox.lastLine = endLine;
-            textBox.EnableSpeech();
+            if (textAssest != null)
+            {
+                textBox.ReloadSpeechScript(textAssest);
+                textBox.textLine = startLine;
+                textBox.lastLine = endLine;
+                textBox.EnableSpeech();
+            }
+            
             if (gameObject.tag.Equals("Quest"))
             {
-                questsManager.StartQuest(gameObject.name);
+                questsManager.activeQuests.Add(gameObject.name);
+                questsManager.QuestTypeManager(gameObject.name);
             }
             if (destroyAfterSpeech)
             {
+                destroyed.objects.Add(gameObject.name);
                 Destroy(gameObject);
             }
         }
@@ -78,5 +110,11 @@ public class ActivateDialog : MonoBehaviour
             waitForPress = false;
             
         }
+    }
+    public void GivePlayerReward()
+    {
+       
+        levels.updateXP(20);
+        playerInv.GiveItems("Heart");
     }
 }

@@ -14,11 +14,13 @@ public class PlayerData : MonoBehaviour
     LevelSystem levelSystem;
     Vector2 spawnPos;
     GameStart gameStart;
+    QuestsManager questsManager;
     public PlayerSaveData playerSave = new PlayerSaveData();
     //private InventorySaveData inventorySave = new InventorySaveData();
     
     private void Awake()
     {
+        questsManager = GameObject.Find("QuestManager").GetComponent<QuestsManager>();
         gameStart = GameObject.Find("GameStarter").GetComponent<GameStart>();
         inv = GameObject.Find("Player").GetComponent<InventoryScript>();
         sceneLoaderManager = GameObject.Find("GameManager");
@@ -76,6 +78,7 @@ public class PlayerData : MonoBehaviour
                 playerSave.swordName = inv.PlayerItems[i].title;
             }
         }
+        playerSave.killCount = questsManager.EnemiesKilled;
         playerSave.numOfSparks = inv.Sparks;
         playerSave.playerPos = player.transform.position;
         playerSave.MaxHP = playerStats.MaxHP;
@@ -90,15 +93,20 @@ public class PlayerData : MonoBehaviour
     public void LoadPlayerData()
     {
         playerSave = SaveManager.CurrentSaveData.playerSaveData;
-        inv.Sparks = playerSave.numOfSparks;
+        questsManager.EnemiesKilled = playerSave.killCount;
+        for (int i = 0; i < playerSave.numOfSparks; i++)
+        {
+            inv.CollectSparks();
+        }
         playerStats.CurrentHealth = playerSave.CurrentHealth;
         playerStats.MaxHP = playerSave.MaxHP;
+        levelSystem.UpdateLevelText(playerSave.level);
         levelSystem.CurrentXP = playerSave.XP;
         levelSystem.PlayerLevel = playerSave.level;
         inv.Sparks = playerSave.numOfSparks;
         if (playerSave.swordName != null)
         {
-            //add code here
+            inv.GiveItems(playerSave.swordName);
         }
         playerStats.IsAlive = true;    
     }
@@ -117,5 +125,5 @@ public struct PlayerSaveData
     public int numOfSparks;
     public string swordName;
     public string test;
-    //add a public int killCount?
+    public int killCount;
 }

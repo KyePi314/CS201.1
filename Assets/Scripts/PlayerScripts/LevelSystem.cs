@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelSystem : MonoBehaviour
 {
+    TMP_Text lvlText;
     public static LevelSystem instance;
     [SerializeField]
     private int currentXP;
@@ -24,7 +26,12 @@ public class LevelSystem : MonoBehaviour
     {
         //setting the player's starting level
         CurrentLevel = 0;
-       
+        
+       lvlText = GameObject.Find("PlayerLevel").GetComponent<TMP_Text>();
+    }
+    private void Start()
+    {
+        lvlText.text = "Level: " + CurrentLevel;
     }
     //updates the player XP whenever the player recieves new XP whether through quests or killing enemies
     public void updateXP(int exp)
@@ -44,12 +51,16 @@ public class LevelSystem : MonoBehaviour
             {
                 stats.MaxHP += 5;
             }
-            //new level message to be added here
+            UpdateLevelText(cLvl);
         }
 
         xpToNextLevel = (int)(50f * (Mathf.Pow(CurrentLevel + 1, 2) - (5 * (CurrentLevel + 1)) + 8));
         int diffXP = xpToNextLevel - currentXP;
 
         int totalDiff = xpToNextLevel - (100 * CurrentLevel * CurrentLevel);
+    }
+    public void UpdateLevelText(int level)
+    {
+        lvlText.text = "Level: " + level;
     }
 }

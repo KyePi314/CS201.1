@@ -179,7 +179,6 @@ public class enemyMovement : MonoBehaviour
             return;
         }
         IsStunned = true;
-        Debug.Log("Enemy" + isStunned.ToString());
         StartCoroutine(StunnedTime());
     }
     //Handles how long the enemy is stunned for.

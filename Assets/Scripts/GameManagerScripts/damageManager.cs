@@ -180,18 +180,10 @@ public class damageManager : MonoBehaviour
     {
         if (tag.Equals("Enemy"))
         {
-            //currently not working :(
-            Debug.LogError(questsManager.IsQuestActive.ToString());
-            var n = gameObject.name;
-            Debug.Log(n);
             if (questsManager.IsQuestActive && gameObject.name == "Golem")
             {
-                Debug.LogWarning(gameObject.name);
                 questsManager.EnemiesKilled++;
-                Debug.Log("Hey this works " + questsManager.EnemiesKilled.ToString());
             }
-            
-
         }
     }
     public void RandomLoot()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,14 +14,20 @@ public class QuestsManager : MonoBehaviour
     InventoryScript sparks;
     public TMP_Text questText;
     public bool isActive = true;
-    private bool timeKeeper;
-    public string QuestName;
-    private float textTimer = 1f;
+    private bool timeKeeper = false;
+    private float textTimer = 3f;
     private float elapsedTimer = 0;
     [SerializeField]
     private int enemiesKilled;
-    QuestStatus status; 
+    QuestStatus status;
+    [SerializeField]
     private bool questActive;
+    public bool questCompleted = false;
+    string newQuest;
+    [SerializeField]
+    string finishQuest;
+    public List<string> activeQuests;
+    public List<string> CompletedQuests;
     public bool IsQuestActive
     {
         get { return questActive; }
@@ -28,6 +35,18 @@ public class QuestsManager : MonoBehaviour
         {
             questActive = value;
         }
+    }public bool IsQuestCompleted
+    {
+        get { return questCompleted; }
+        set
+        {
+            questCompleted = value;
+        }
+    }
+    public string FinishQuest
+    {
+        get { return  finishQuest; }
+        set { finishQuest = value;}
     }
     public int EnemiesKilled
     {
@@ -51,9 +70,19 @@ public class QuestsManager : MonoBehaviour
     }
     private void Update()
     {
+        //Timer for how long the text for the quest is on the screen for
         if (timeKeeper)
         {
-            timer();
+            elapsedTimer += Time.deltaTime;
+            if (elapsedTimer > textTimer)
+            {
+                questText.text = null;
+                timeKeeper = false;
+                
+                questCompleted = false;
+                elapsedTimer = 0;
+                Debug.Log(elapsedTimer + " " + timeKeeper);
+            }
         }
         if (isActive)
         {
@@ -63,71 +92,82 @@ public class QuestsManager : MonoBehaviour
         {
             questManager.SetActive(false);
         }
-        if (EnemiesKilled == 5)
+        //Checks if a quest has been completed or not, and passes the name of the completed quest to the quest manager function
+        if (questCompleted)
         {
-            GolemQuest();
+            QuestTypeManager(FinishQuest);
         }
     }
-
-    public void StartQuest(string name)
+    void AddObjectToList(string obj)
     {
+        if (!CompletedQuests.Contains(obj))
+            CompletedQuests.Add(obj);
+
+    }
+    //Handles which quests to load informtation for depending on the name passed to the function
+    public void QuestTypeManager(string name)
+    {
+        for (int i = 0; i < activeQuests.Count; i++)
+        {
+            if (activeQuests[i] == name)
+            {
+                newQuest = name;
+                break;
+            }
+        }
         
-        QuestName = name;
-        switch (QuestName)
+        switch (newQuest)
         {
             case "Gort":
-                status = QuestStatus.Active;
-                
                 damage.EnemyName = "Golem";
                 GolemQuest();
                 break;
             case "NPC_2":
+                status = QuestStatus.Active;
+                MasterQuestline();
                 break;
             default: 
                 break;
         }
     }
-
+    //Gorts quest to kill golems
     public void GolemQuest()
     {
-        if (status == QuestStatus.Active && EnemiesKilled < 5)
+        if (EnemiesKilled < 5)
         {
             timeKeeper = true;
             IsQuestActive = true;
-           questText.text = "Gort's Golem Issue: Quest Started";
+            activeQuests.Add("Gort");
+            questText.text = "Gort's Golem Issue: Quest Started";
            
         }
-        else if (EnemiesKilled == 5)
+        else if (EnemiesKilled >= 5 && questCompleted)
         {
-            Debug.Log("Quest working");
-           questText.text = "Gorts's Golem Issue: Quest Completed!";
-            textTimer -= Time.deltaTime;
+            finishQuest = "Gort";
+            AddObjectToList(FinishQuest);
             timeKeeper = true;
             IsQuestActive = false;
-            status = QuestStatus.Completed;
+            questText.text = "Gorts's Golem Issue: Quest Completed!";
         }
 
     }
-    private void timer()
-    {
-        elapsedTimer += Time.deltaTime;
-        if (elapsedTimer > textTimer)
-        {
-            questText.text = null;
-            timeKeeper = false;
-        }
-        
-    }
+    //Main overarching quest, in a future update this would spawn a mini boss in at the end
     public void MasterQuestline()
     {
-        status = QuestStatus.Pending;
-        if (sparks.Sparks < 8)
+        
+        if (status == QuestStatus.Active && sparks.Sparks < 8)
         {
-            status = QuestStatus.Active;
+            timeKeeper = true;
+            IsQuestActive = true;
+            activeQuests.Add("NPC_2");
+            questText.text = "Saviour of the Forest: Started";
         }
-        else if (EnemiesKilled == 8)
+        else if (sparks.Sparks == 8)
         {
-            status = QuestStatus.Completed;
+            timeKeeper = true;
+            IsQuestActive = false;
+            questText.text = "Saviour of the Forest: Completed";
+            finishQuest = "NPC_2";
         }
     }
 }
