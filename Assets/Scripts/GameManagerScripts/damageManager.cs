@@ -14,6 +14,7 @@ public class damageManager : MonoBehaviour
     ItemDatabase inv;
     Animator animator;
     LevelSystem levelSystem;
+    QuestsManager questsManager;
     EnemyLevels enemyLevels;
     SpriteRenderer spriteRenderer;
     GameObject objRemoved;
@@ -35,9 +36,18 @@ public class damageManager : MonoBehaviour
     private float lastHitTimer = 0;
     private float invincibiltyTimer = 0.25f;
     private int _hitPower;
-    public float timer = 0.5f;
-    private float timeElapsed = 0;
+    
+    [SerializeField]
+    private string enemyName;
+    
+    
     public List<Transform> ItemDrop = new List<Transform>();
+    
+    public string EnemyName
+    {
+        get { return enemyName; }
+        set { enemyName = value; }
+    }
     public int MaxHP
     {
         get
@@ -74,7 +84,7 @@ public class damageManager : MonoBehaviour
             _hitPower = value;
         }
     }
-
+    
     public bool IsAlive
     {
         get
@@ -100,16 +110,21 @@ public class damageManager : MonoBehaviour
             animator.SetBool(AnimStrings.lockVelocity, value);
         }
     }
+    
     private void Awake()
     {
+        questsManager = GameObject.Find("QuestManager").GetComponent<QuestsManager>();
         inv = GameObject.Find("ItemDatabase").GetComponent<ItemDatabase>();
         animator = GetComponent<Animator>();
         levelSystem = GameObject.Find("Player").GetComponent<LevelSystem>();
         enemyLevels = GetComponent<EnemyLevels>();
         hitSound = GameObject.Find("Player").GetComponent<AudioSource>();
+        
     }
     public void Update()
     {
+        
+
         if (isInvincible)
         {
             if (lastHitTimer > invincibiltyTimer)
@@ -120,23 +135,7 @@ public class damageManager : MonoBehaviour
 
             lastHitTimer += Time.deltaTime;
         }
-        if (!IsAlive && gameObject.tag.Equals("Enemy"))
-        {
-            
-            //timeElapsed = 0f;
-            //spriteRenderer = animator.GetComponent<SpriteRenderer>();
-            //startColor = spriteRenderer.color;
-            //objRemoved = animator.gameObject;
-
-            //timeElapsed += Time.deltaTime;
-            //float newAlpha = startColor.a * (1 - (timeElapsed / timer));
-            ////spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
-
-            //if (timeElapsed > timer)
-            //{
-            //    Destroy(objRemoved);
-            //}
-        }
+        
     }
     public bool Hit(int damage, Vector2 knockback)
     {
@@ -161,8 +160,10 @@ public class damageManager : MonoBehaviour
                     levelSystem.updateXP(enemyLevels.enemyXP);
                     Destroy(gameObject, 0.5f);
                     RandomLoot();
-                }
+                    
 
+                }
+                EnemyQuest();
             }
 
             damageableHit?.Invoke(damage, knockback);
@@ -175,7 +176,16 @@ public class damageManager : MonoBehaviour
         }
 
     }
-
+    public void EnemyQuest()
+    {
+        if (tag.Equals("Enemy"))
+        {
+            if (questsManager.IsQuestActive && gameObject.name == "Golem")
+            {
+                questsManager.EnemiesKilled++;
+            }
+        }
+    }
     public void RandomLoot()
     {
         
@@ -204,6 +214,5 @@ public class damageManager : MonoBehaviour
             //nothingg gets dropped
         }
         Prefab.tag = "Collectable";
-        Debug.Log(rndNum.ToString());
     }
 }

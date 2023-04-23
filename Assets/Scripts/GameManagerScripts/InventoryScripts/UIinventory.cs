@@ -106,7 +106,7 @@ public class UIinventory : MonoBehaviour
             if (uIitems[i].item == item)
             {
                 //Incremets the amount of that particular item that the player has
-                item.itemAmount += itemAmount;
+                item.itemAmount++;
                 //Updates the text to this new amount
                 var txt = uIitems[i].GetComponentInChildren<TMP_Text>();
                 txt.text = item.itemAmount.ToString();
@@ -116,8 +116,6 @@ public class UIinventory : MonoBehaviour
     }
     public void RemoveItem(Item item)
     {
-        Debug.Log("Removed correct item" + item.title);
-
         //removes items
         UpdateSlot(uIitems.FindIndex(i => i.item == item), null);
     }

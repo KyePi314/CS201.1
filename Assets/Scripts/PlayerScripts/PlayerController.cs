@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public float airSpeed = 5f;
     private bool doubleJump;
     private int currentItemName;
+    private string statName;
     //Used to access the animator and RigidBody components for objects with the playercontroller script attached to them (eg the player)
     Rigidbody2D rb;
     Animator animator;
@@ -141,6 +142,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        
     }
     private void FixedUpdate()
     {
@@ -200,12 +202,14 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger(AnimStrings.jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpimpulse);
             doubleJump = false;
+            IsRunning = false;
         }
         if (context.started && doubleJump == false) //if the player has only jumped once, the double jump bool will be false meaning that they can double jump.
         {
             animator.SetTrigger(AnimStrings.jump);
             rb.velocity = new Vector2(rb.velocity.x, jumpimpulse);
             doubleJump = true;
+            IsRunning = false;
         }
     }
 
@@ -231,6 +235,7 @@ public class PlayerController : MonoBehaviour
                         //Allows players to use healing items
                         if (stat.Key == "Regen")
                         {
+                            statName = stat.Key;
                             statValue = stat.Value;
                             break;
                         }
@@ -238,6 +243,7 @@ public class PlayerController : MonoBehaviour
                         {
                             //Set a timer for this at some point
                             statValue = stat.Value;
+                            statName = stat.Key;
                             break;
                         }
                     }
@@ -248,16 +254,22 @@ public class PlayerController : MonoBehaviour
             itemEffects();
         }
         
-        Debug.Log(CurrentItemName);
     }
 
     public void itemEffects()
     {
         //Adds the correct amount of regen to the player's health
-        damage.CurrentHealth += statValue;
-
+        if (statName == "Regen" && damage.CurrentHealth < damage.MaxHP)
+        {
+            damage.CurrentHealth += statValue;
+            
+        }
+        else if (statName == "moveSpeed")
+        {
+            walkSpeed += statValue;
+        }
         //Makes sure that the correct item is being deleted from the player's inventory when it is used, and that the correct amount is being taken away, when the item amount equals zero, the item is removed from the inventory slot
-        for (int i = 0; i < inventory.PlayerItems.Count; i++) 
+        for (int i = 0; i < inventory.PlayerItems.Count; i++)
         {
             var t = inventory.PlayerItems.Find(x => x.stats.ContainsValue(statValue));
             if (t == inventory.PlayerItems[i])
@@ -265,21 +277,23 @@ public class PlayerController : MonoBehaviour
                 if (inventory.PlayerItems[i].itemAmount > 0)
                 {
                     inventory.PlayerItems[i].itemAmount -= 1;
-                    Debug.LogWarning(inventory.PlayerItems[i].itemAmount);
+                    if (inventory.PlayerItems[i].itemAmount == 0)
+                    {
+                        inventory.RemoveItem(t.id);
+                        uiInv.RemoveItem(t);
+                    }
                     break;
                 }
                 else if (inventory.PlayerItems[i].itemAmount == 0)
                 {
                     inventory.RemoveItem(t.id);
+                    uiInv.RemoveItem(t);
                     break;
                 }
 
             }
-           
-        }
-       
 
-        
+        }
     }
     public void onHit(int damage, Vector2 knockback)
     {

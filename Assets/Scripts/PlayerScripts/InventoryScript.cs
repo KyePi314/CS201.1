@@ -11,7 +11,6 @@ using UnityEngine.UI;
 public class InventoryScript : MonoBehaviour
 {
     //Super basic inventory system for the prototype, also handles collecting sparks 
-    
     private int sparks;
     SparkCounter counter;
     public UIitem uiItems;
@@ -45,19 +44,8 @@ public class InventoryScript : MonoBehaviour
     {
         inventoryInstance = this;
         counter = GameObject.Find("SparkCounter").GetComponent<SparkCounter>();
-        
         itemDatabase = GameObject.FindWithTag("ItemDatabase").GetComponent<ItemDatabase>();
         inventory = GameObject.Find("Inventory").GetComponent<UIinventory>();
-    }
-    private void Start()
-    {
-        GiveItems("Sword");
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     //Gets the items based off the ID
     public void GiveItems(int id)
@@ -87,7 +75,6 @@ public class InventoryScript : MonoBehaviour
         {
             inventory.RemoveItem(item);
             PlayerItems.Remove(item);
-            Debug.Log("Item Removed" + item.title);
         }
     }
     
